@@ -31,6 +31,7 @@ void decode(ll val){
 			now[i][j] = val % 3, val /= 3;
 }
 void Solve(){
+	m.clear();
 	string str[5];
 	int sx, sy;
 	for(int i = 0 ; i < 5 ; i++){
@@ -75,8 +76,7 @@ int main(){
 	getline(cin, tmp);
 	bool first = true;
 	while(t--){
-		if(first) first = false;
-		else cout << endl;
 		Solve();
+		cout << endl;
 	}
 }
