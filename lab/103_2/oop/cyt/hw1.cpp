@@ -42,10 +42,16 @@ class BIGNUM{
 		friend istream& operator>>(istream& ifs, BIGNUM &b){
 			string str;
 			ifs >> str;
+			if(str[0] == '(')
+				str = str.substr(1, str.size()-2);
 			b = BIGNUM(str);
 			return ifs;
 		}
 		friend ostream& operator<<(ostream& ofs, BIGNUM const &b){
+			if( b == BIGNUM("0") ){
+				ofs << "0";
+				return ofs;
+			}
 			if(b.flag) ofs << "-";
 			bool first = false;
 			for(int i = MAX_SIZE - 1 ; i >= 0 ; i--){
@@ -58,7 +64,6 @@ class BIGNUM{
 					}
 				}
 			}
-			if(!first) ofs << "0";
 			return ofs;
 		}
 };
@@ -110,7 +115,6 @@ BIGNUM BIGNUM::operator+(BIGNUM const &b) const {
 		if( b1 > b2 ){
 			re = minus(b1, b2);
 			re.flag = (*this).flag;
-		} else if ( b1 == b2 ){
 		} else {
 			re = minus(b2, b1);
 			re.flag = b.flag;
