@@ -153,9 +153,7 @@ BIGNUM BIGNUM::operator/(BIGNUM const &b) const {
 			step = step / 2;
 		}
 	}
-	if( re != BIGNUM("0") ){
-		re.flag = flag ^ b.flag;
-	}
+	re.flag = flag ^ b.flag;
 	return re;
 }
 BIGNUM BIGNUM::operator/(int const &b) const {
