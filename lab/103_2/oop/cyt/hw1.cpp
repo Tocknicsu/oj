@@ -142,10 +142,6 @@ BIGNUM BIGNUM::operator*(BIGNUM const &b) const {
 }
 BIGNUM BIGNUM::operator/(BIGNUM const &b) const {
 	BIGNUM re, step = (*this);
-	if( b == BIGNUM("0") ){
-		cout << "Segment fault" << endl;
-		exit(0);
-	}
 	while( step != BIGNUM("0") ){
 		if( (re + step) * b <= (*this) ){
 			re = re + step;
@@ -166,12 +162,23 @@ BIGNUM BIGNUM::operator/(int const &b) const {
 	}
 	return re;
 }
-bool BIGNUM::operator<(BIGNUM const &b) const {
-	for(int i = MAX_SIZE - 1 ; i >= 0 ; i--){
-		if(v[i] > b.v[i]) return false;
-		else if(v[i] < b.v[i]) return true;
+bool BIGNUM::operator<(BIGNUM const &b) const {	//to check~
+	if( flag ^ b.flag ){
+		return !flag;
+	} else if ( flag == 0 ){
+		for(int i = MAX_SIZE - 1 ; i >= 0 ; i--){
+			if(v[i] > b.v[i]) return false;
+			else if(v[i] < b.v[i]) return true;
+		}
+		return false;
+	} else {
+		for(int i = MAX_SIZE - 1 ; i >= 0 ; i--){
+			if(v[i] < b.v[i]) return false;
+			else if(v[i] > b.v[i]) return true;
+		}
+		return false;
+		
 	}
-	return false;
 }
 bool BIGNUM::operator>(BIGNUM const &b) const {
 	return b < (*this);
@@ -212,6 +219,10 @@ int main(){
 			case '*':
 				cout << a * b << endl; break;
 			case '/':
+				if( b == BIGNUM("0") ){
+					cout << "error" << endl;
+					break;
+				}
 				cout << a / b << endl; break;
 			default:
 				break;
