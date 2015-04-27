@@ -10,13 +10,16 @@ class MATRIX{
 		MATRIX(const MATRIX&);
 		MATRIX(const int, const int);
 		void set_value(const int*);
-		void print();
+		void print() const;
 
 		MATRIX operator+(const MATRIX&) const;
 		MATRIX operator-(const MATRIX&) const;
 		MATRIX operator*(const MATRIX&) const;
 
 		MATRIX Transpose() const;
+		MATRIX Inverse() const;
+		MATRIX eli(int,int) const;
+		int det() const;
 };
 MATRIX::MATRIX(){
 	r = c = 0;
@@ -41,7 +44,7 @@ void MATRIX::set_value(const int* _v){
 		for(int j = 0 ; j < c ; j++)
 			v[i][j] = _v[i*c+j];
 }
-void MATRIX::print(){
+void MATRIX::print() const {
 	for(int i = 0 ; i < r ; i++){
 		for(int j = 0 ; j < c ; j++)
 			cout << v[i][j] << ' ';
@@ -89,6 +92,40 @@ MATRIX MATRIX::Transpose() const {
 			re.v[i][j] = v[j][i];
 	return re;
 }
+MATRIX MATRIX::Inverse() const {
+	if(r != c){
+		cout << "*warning" << endl;
+		return MATRIX(0, 0);
+	}
+	MATRIX re(r, c);
+	int k = (*this).det();
+	MATRIX t = (*this).Transpose();
+	for(int i = 0 , flag = 1 ; i < r ; i++)
+		for(int j = 0 ; j < c ; j++, flag *= -1)
+			re.v[i][j] = flag * t.eli(i, j).det() / k;
+	return re;
+}
+MATRIX MATRIX::eli(int x, int y) const {
+	MATRIX re(r-1, c-1);
+	int tmp_v[MAX * MAX];
+	for(int i = 0, now = 0 ; i < r * c ; i++)
+		if(i/c == x || i%c==y) continue;
+		else tmp_v[now++] = v[i/c][i%c];
+	re.set_value(tmp_v);
+	return re;
+}
+int MATRIX::det() const {
+	if( r != c ){
+		cout << "*warning" << endl;
+		return 0;
+	}
+	if( r == 2 )
+		return v[0][0] * v[1][1] - v[1][0] * v[0][1];
+	int re = 0;
+	for(int i = 0, flag = 1 ; i < r ; i++, flag *= -1)
+		re += flag * v[0][i] * (*this).eli(0,i).det();
+	return re;
+}
 void print_line(){
 	for(int i = 0 ; i < 25 ; i++)
 		cout << "-";
@@ -96,9 +133,9 @@ void print_line(){
 }
 int main(){
 	freopen("pc.in", "r", stdin);
-	MATRIX m[5];
+	MATRIX m[6];
 	int v[MAX * MAX];
-	for(int i = 0 ; i < 4 ; i++){
+	for(int i = 0 ; i < 6 ; i++){
 		int r, c;
 		cin >> r >> c;
 		m[i] = MATRIX(r, c);
@@ -117,5 +154,9 @@ int main(){
 	(m[2]-m[3]).print();
 	print_line();
 	(m[2]*m[3]).print();
+	print_line();
+	(m[2].Inverse()).print();
+	print_line();
+	(m[4].Inverse() * m[5].Transpose()).print();
 	print_line();
 }
