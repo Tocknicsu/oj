@@ -94,7 +94,7 @@ bool SYSTEM::is_login(){
 void SYSTEM::add(){
 	string name;
 	cin >> name;
-	for(int i = 0 ; i < user_list.size() ; i++){
+	for(int i = 0 ; i < (int)user_list.size() ; i++){
 		if(name == user_list[i].name){
 			cout << "This user has been registered!" << endl;
 			return;
@@ -112,7 +112,7 @@ void SYSTEM::login(){
 	}
 	string name;
 	cin >> name;
-	for(int i = 0 ; i < user_list.size() ; i++){
+	for(int i = 0 ; i < (int)user_list.size() ; i++){
 		if(user_list[i].name == name){
 			current_user = i;
 			cout << "Welcome! " << user_list[current_user].name << endl;
@@ -124,14 +124,14 @@ void SYSTEM::login(){
 void SYSTEM::choose_course(){
 	string course_name;
 	while(cout << "Enter course name: ", cin >> course_name, course_name != "END"){
-		for(int i = 0 ; i < course_list.size() ; i++){
+		for(int i = 0 ; i < (int)course_list.size() ; i++){
 			if(course_name == course_list[i].name){
 				bool coll = false;
-				for(int j = 0 ; j < user_list[current_user].course.size() ; j++){
+				for(int j = 0 ; j < (int)user_list[current_user].course.size() ; j++){
 					vector<int> tmp1 = course_list[i].time;
 					vector<int> tmp2 = course_list[user_list[current_user].course[j]].time;
-					for(int x = 0 ; x < tmp1.size() ; x++){
-						for(int y = 0 ; y < tmp2.size() ; y++){
+					for(int x = 0 ; x < (int)tmp1.size() ; x++){
+						for(int y = 0 ; y < (int)tmp2.size() ; y++){
 							if(tmp1[x] == tmp2[y])
 								coll = true;
 						}
@@ -149,10 +149,10 @@ void SYSTEM::choose_course(){
 }
 void SYSTEM::show_course(){
 	string week[] = {"MON", "TUE", "WED", "THU", "FRI"};
-	for(int i = 0 ; i < user_list[current_user].course.size() ; i++){
+	for(int i = 0 ; i < (int)user_list[current_user].course.size() ; i++){
 		int course_id = user_list[current_user].course[i];
 		cout << course_list[course_id].name << ' ' << week[course_list[course_id].time[0]/8] << ' ';
-		for(int j = 0 ; j < course_list[course_id].time.size() ; j++){
+		for(int j = 0 ; j < (int)course_list[course_id].time.size() ; j++){
 			cout << course_list[course_id].time[j] % 8 + 1;
 		}
 		cout << endl;
