@@ -20,7 +20,6 @@ class CD_ROM : Device {
 		CD_ROM(){}
 		CD_ROM(int _id, string _name) : Device(_id, _name) {}
 		virtual void show(){
-			cout << "Device<" << get_ID() << ">: <CD>" << get_NAME() << endl;
 		}
 };
 class HardDisk : Device {
@@ -28,7 +27,6 @@ class HardDisk : Device {
 		HardDisk(){}
 		HardDisk(int _id, string _name) : Device(_id, _name) {}
 		virtual void show(){
-			cout << "Device<" << get_ID() << ">: <HD>" << get_NAME() << endl;
 		}
 };
 class Host{
@@ -36,19 +34,8 @@ class Host{
 		vector<Device*> device;
 	public:
 		void show(int &num){
-			if(device.size()){
-				for(int i = 0 ; i < (int)device.size() ; i++){
-					cout << "[" << num++ << "]";
-					device[i]->show();
-				}
-			} else {
-				cout << "The number of mounted device is 0" << endl;
-				cout << "There is no any device in the host" << endl;
-			}
 		}
 		void mount(Device *b){
-			device.push_back(b);
-			b->set_ID(device.size());
 		}
 };
 int main(){
