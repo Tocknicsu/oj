@@ -1,7 +1,5 @@
 #ifndef XHOST_H
 #define XHOST_H
-#include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
 #include "host.h"
@@ -17,27 +15,25 @@ struct encrypt_plugin : send_plugin{
 	const char k;
 	encrypt_plugin(const char _k) : k(_k) {}
 	virtual string operator()(string s) const {
-		for(int i = 0 ; i < (int)s.size() ; i++){
+		for(int i = 0 ; i < (int)s.size() ; i++)
 			s[i] = (s[i] - 0x20 + k) % (0x7F - 0x20) + 0x20;
-		}
 		return s;
 	}
 };
 struct decrypt_plugin : recv_plugin{
 	const char k;
 	decrypt_plugin(const char _k) : k(_k) {}
-	virtual void operator()(const host& from, const host& to, const string& s)const{
+	virtual void operator()(const host&, const host& to, const string& s)const{
 		string str = s;
-		for(int i = 0 ; i < (int)str.size() ; i++){
+		for(int i = 0 ; i < (int)str.size() ; i++)
 			str[i] = (str[i] - 0x20 - k + 0x7F - 0x20) % (0x7F - 0x20) + 0x20;
-		}
 		cout << ("[") << (to.name) << "] " << str << endl;
 	}
 };
 struct forward_plugin : recv_plugin{
 	const host& dst;
 	forward_plugin(const host& _dst) : dst(_dst) {}
-	virtual void operator()(const host& from, const host& to, const string& s)const{
+	virtual void operator()(const host&, const host& to, const string& s)const{
 		to.send(dst, s);
 	}
 };
@@ -69,8 +65,7 @@ void xhost::send(const host& other, const string& s) const {
 	host::send(other, str);
 }
 void xhost::handle_recv(const host& other, const string& s) const {
-	string str = s;
 	for(int i = 0 ; i < (int)RP.size() ; i++)
-		(*RP[i])(other, (*this), str);
+		(*RP[i])(other, (*this), s);
 }
 #endif
