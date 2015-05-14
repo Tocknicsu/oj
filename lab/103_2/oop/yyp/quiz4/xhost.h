@@ -18,12 +18,10 @@ struct encrypt_plugin : send_plugin{
 	encrypt_plugin(const char _k) : k(_k) {}
 	virtual string operator()(string s) const {
 		for(int i = 0 ; i < (int)s.size() ; i++){
-			s[i] += k;
-			s[i] = s[i] > 0x7E ? s[i] - 0x7E + 0x20 : s[i];
+			s[i] = (s[i] - 0x20 + k) % (0x7F - 0x20) + 0x20;
 		}
 		return s;
 	}
-
 };
 struct decrypt_plugin : recv_plugin{
 	const char k;
@@ -31,8 +29,7 @@ struct decrypt_plugin : recv_plugin{
 	virtual void operator()(const host& from, const host& to, const string& s)const{
 		string str = s;
 		for(int i = 0 ; i < (int)str.size() ; i++){
-			str[i] -= k;
-			str[i] = str[i] < 0x20 ? str[i] + 0x7E - 0x20 : str[i];
+			str[i] = (str[i] - 0x20 - k + 0x7F - 0x20) % (0x7F - 0x20) + 0x20;
 		}
 		cout << ("[") << (to.name) << "] " << str << endl;
 	}
