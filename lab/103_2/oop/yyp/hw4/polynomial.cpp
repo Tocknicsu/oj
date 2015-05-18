@@ -23,6 +23,12 @@ polynomial operator-(polynomial p){
 		p.coe[i] *= -1;
 	return p;
 }
+/*
+friend polynomial operator+(polynomial a, const polynomial &b);
+polynomial operator+(const polynomial b);
+polynomial polynomial::operator+(const polynomial b){
+}
+*/
 polynomial operator+(polynomial a, const polynomial& b){
 	int sz = max(int(a.coe.size()), int(b.coe.size()));
 	polynomial ret;
