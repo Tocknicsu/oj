@@ -34,6 +34,12 @@ int find_class_id(string str){
 			return i;
 	return -1;
 }
+int find_member_id(CLASS &cls, string str){
+	for(int i = 0 ; i < (int)cls.var.size() ; i++)
+		if(cls.var[i].name == str)
+			return i;
+	return -1;
+}
 int main(){
 	freopen("hw5.in", "r", stdin);
 	int n;
@@ -61,11 +67,7 @@ int main(){
 			int spec_id = find_class_id(from);
 			Class[i].from = spec_id;
 			for(int j = 0 ; j < (int)Class[spec_id].var.size() ; j++){
-				bool push = true;
-				for(int k = 0 ; k < (int)Class[i].var.size() ; k++)
-					if(Class[i].var[k].name == Class[spec_id].var[j].name)
-						push = false;
-				if(push)
+				if(find_member_id(Class[i], Class[spec_id].var[j].name)==-1)
 					Class[i].var.push_back(VAR(__table[spec_type][Class[spec_id].var[j].type], Class[spec_id].var[j].from, Class[spec_id].var[j].name));
 			}
 			Class[i].type = spec_type;
@@ -87,13 +89,7 @@ int main(){
 			continue;
 		}
 		CLASS& look = Class[lid], &now = Class[nid];
-		int n_var_id = -1, l_var_id = -1;
-		for(int i = 0 ; i < (int)look.var.size() ; i++)
-			if(look.var[i].name == var)
-				l_var_id = i;
-		for(int i = 0 ; i < (int)now.var.size() ; i++)
-			if(now.var[i].name == var)
-				n_var_id = i;
+		int n_var_id = find_member_id(now, var), l_var_id = find_member_id(look, var);
 		if(l_var_id==-1){
 			cout << "Member not found" << endl;
 			continue;
@@ -115,32 +111,5 @@ int main(){
 		} else {
 			cout << "Invalid access" << endl;
 		}
-		/*
-		if(lid == nid){
-			if( look.var[l_var_id].type ){
-				cout << Class[look.var[l_var_id].from].name << "." << look.var[l_var_id].name << endl;
-			} else {
-				cout << "Invalid access" << endl;
-			}
-		} else if(up){
-			if( look.var[l_var_id].type == 3 ){
-				cout << Class[look.var[l_var_id].from].name << "." << look.var[l_var_id].name << endl;
-			} else {
-				cout << "Invalid access" << endl;
-			}
-		} else if(down){
-			if( all_public && now.var[n_var_id].type ){
-				cout << Class[look.var[l_var_id].from].name << "." << look.var[l_var_id].name << endl;
-			} else {
-				cout << "Invalid access" << endl;
-			}
-		} else {
-			if( look.var[l_var_id].type == 3 ){
-				cout << Class[look.var[l_var_id].from].name << "." << look.var[l_var_id].name << endl;
-			} else {
-				cout << "Invalid access" << endl;
-			}
-		}
-		*/
 	}
 }
