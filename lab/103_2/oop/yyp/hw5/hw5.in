@@ -1,0 +1,17 @@
+3
+
+struct A : none
+public a
+protected b
+private c
+end
+
+struct B : private A
+end
+
+struct C : B
+end
+
+B C.a
+B C.b
+B C.c

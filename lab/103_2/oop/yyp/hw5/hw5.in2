@@ -1,0 +1,30 @@
+5
+class A : none
+protected a
+protected b
+private c
+end
+class B : public A
+public d
+private e
+end
+struct C : B
+public a
+end
+class D : B
+end
+class E : protected D
+end
+B B.b
+B B.e
+C B.c
+C C.a
+C C.f
+C Z.a
+A C.a
+A C.e
+A D.c
+D D.a
+E D.d
+D D.b
+D C.b
