@@ -94,19 +94,14 @@ int main(){
 			cout << "Member not found" << endl;
 			continue;
 		}
-		bool up = false, down = false, all_public = true;
-		int now_id = nid;
-		while(!up && now_id != Class[now_id].from){
-			now_id = Class[now_id].from;
-			up = now_id == lid;
-		}
-		now_id = lid;
+		bool down = false, all_public = true;
+		int now_id = lid;
 		while(!down && now_id != Class[now_id].from){
 			all_public = all_public && (Class[now_id].type == 3);
 			now_id = Class[now_id].from;
 			down = now_id == nid;
 		}
-		if((lid == nid && look.var[l_var_id].type) || (up && look.var[l_var_id].type==3) || (down && all_public && now.var[n_var_id].type) || look.var[l_var_id].type == 3){
+		if((lid == nid && look.var[l_var_id].type) || (down && all_public && now.var[n_var_id].type) || look.var[l_var_id].type == 3){
 			cout << Class[look.var[l_var_id].from].name << "." << look.var[l_var_id].name << endl;
 		} else {
 			cout << "Invalid access" << endl;
