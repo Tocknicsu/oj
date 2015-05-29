@@ -5,26 +5,7 @@
 
 #include "stable_vector.hpp"
 using namespace std;
-void print(const stable_vector<int> &vec){
-	for(int i = 0 ; i < (int)vec.size() ; i++)
-		cout << vec[i] << " ";
-	cout << endl;
-}
 int main() {
-	stable_vector<int> v;
-	v.assign(5, 3);
-	print(v);
-	
-	stable_vector<int> tv;
-	while(v.size()) v.pop_back();
-	print(v);
-	cout << "***" << (v==tv) << endl;
-	for(int i = 0 ; i < 5 ; i++)
-		v.push_back(i);
-	print(v);
-	v.erase(v.end()-1);
-	print(v);
-	cout << "**" << v.back() << endl;
 
     std::string s = "able was I ere I saw elba";
     stable_vector<int> v1;
