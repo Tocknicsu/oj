@@ -46,7 +46,7 @@ int main(){
 			cout << "Class not found" << endl;
 		} else if(Class[lcls].second.find(var) == Class[lcls].second.end()) {
 			cout << "Member not found" << endl;
-		} else if((ncls == lcls && Class[lcls].second[var].first) || (Class[lcls].first.find(ncls) != Class[lcls].first.end() && Class[ncls].second.find(var) != Class[ncls].second.end() && Class[ncls].second[var].first) || Class[lcls].second[var].first == 3) {
+		} else if((ncls == lcls && Class[lcls].second[var].first) || (Class[lcls].first.find(ncls) != Class[lcls].first.end() && Class[ncls].second.find(var) != Class[ncls].second.end() && Class[ncls].second[var].first && Class[ncls].second[var].second == Class[lcls].second[var].second) || Class[lcls].second[var].first == 3) {
 			cout << Class[lcls].second[var].second << "." << var << endl;
 		} else {
 			cout << "Invalid access" << endl;
