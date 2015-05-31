@@ -18,8 +18,8 @@ int main() {
 	cout << "after: " << v1.front() << " (1029384756)" << endl;
 
 	cout << "origin back: " <<  v1.back() << endl;
-	v1.back() = 1029384756;
-	cout << "after: " << v1.back() << " (1029384756)" << endl;
+	v1.back() = -1029384756;
+	cout << "after: " << v1.back() << " (-1029384756)" << endl;
 
 	
 	for(int i = 0 ; i < (int)v1.size() ; i++)
