@@ -13,3 +13,25 @@ yyp/hw6
 建議大家先將空function的";"改為"{}"<br>
 可以少很多warning<br>
 用command line的記得編譯參數要下--std=c++11<br>
+
+
+stage1
+--------
+在stage1的時候可以多插幾個節點<br>
+之後寫完push_back的時候再回去留一個end的節點就好<br>
+這樣方便做test<br>
+size的部份一開始可以直接等於v的size<br>
+這樣能確保你的end節點沒有錯誤<br>
+也是之後再把他改回正確的<br>
+
+
+
+
+stage2
+--------
+測試的時候<br>
+一開始應該輸出你所有的節點<br>
+之後front跟back都應該要被改變
+
+
+
