@@ -34,4 +34,8 @@ stage2
 之後front跟back都應該要被改變
 
 
-
+stage3、4
+--------
+stage3沒辦法獨立在main裡面做測試
+所以就跟4放在一起測試
+這邊主要測試iterator跟const_iterator的建構跟取值
