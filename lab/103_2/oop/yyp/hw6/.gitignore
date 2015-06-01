@@ -2,3 +2,4 @@ stable_vector.hpp*
 .stable_vector.cpp
 a.out
 *.swp
+test.*
