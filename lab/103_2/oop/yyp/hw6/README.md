@@ -48,4 +48,12 @@ stage3沒辦法獨立在main裡面做測試<br>
 
 stage5
 ----------
-之後再來寫XD
+先測試test5.cpp<br>
+這邊測試insert跟push_back有沒有寫對<br>
+開始之前建議把constructor多宣告的node先移除<br>
+再測試test5_2.cpp<br>
+這部份是測試stable_vector push_back的效率<br>
+正常來說均攤之後的結果要是O(1)<br>
+總之執行超過1秒（基本上沒寫好會根本跑不出來）就是沒有寫的很好<br>
+需要考慮如何改進
+
