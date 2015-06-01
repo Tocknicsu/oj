@@ -5,11 +5,6 @@
 
 #include "stable_vector.hpp"
 using namespace std;
-void print(stable_vector<int>& vec){
-    for(int i = 0 ; i < (int)vec.size() ; i++)
-        cout << vec[i] << ' ';
-    cout << endl;
-}
 int main() {
     std::string s = "able was I ere I saw elba";
     stable_vector<int> v1;
