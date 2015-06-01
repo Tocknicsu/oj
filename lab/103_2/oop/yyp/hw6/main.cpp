@@ -5,8 +5,12 @@
 
 #include "stable_vector.hpp"
 using namespace std;
+void print(stable_vector<int>& vec){
+    for(int i = 0 ; i < (int)vec.size() ; i++)
+        cout << vec[i] << ' ';
+    cout << endl;
+}
 int main() {
-
     std::string s = "able was I ere I saw elba";
     stable_vector<int> v1;
     const stable_vector<int> v2(5, 42); // v2 = {42, 42, 42, 42, 42}
@@ -39,6 +43,7 @@ int main() {
     std::cout << *it << std::endl; // 1           ^it
     u2.erase(u2.begin(), u2.begin() + 4); // u2 = {1, 0, 1, 2, 3, ...}
     std::cout << it[4] << std::endl; // 3          ^it         ^(it + 4)
+
     u1.swap(u2);                   // u1 = {1, 0, 1, 2, 3, ...}
     std::cout << *it << std::endl; // 1     ^it
     return 0;
