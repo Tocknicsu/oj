@@ -13,20 +13,20 @@ int main(){
         cout << v1[i] << ' ';
     cout << endl;
 
-    cout << "You should see 4 times of done and exec time between each other within 1 sec." << endl;
+    cout << "You should see 4 times of done and exec time between each other within 1 sec. Number: 1000000 -> 2000000 -> 1000000 -> 0" << endl;
     stable_vector<int> vec;
     for(int i = 0 ; i < 1000000 ; i++)
         vec.push_back(i);
-    cout << "done." << endl;
+    cout << "done. " << vec.end() - vec.begin() << endl;
     auto it = vec.insert(vec.begin(), vec.begin(), vec.end());
-    cout << "done." << endl;
+    cout << "done. " << vec.end() - vec.begin() << endl;
 
     for(int i = 0 ; i < 1000000 ; i++)
         vec.pop_back();
-    cout << "done" << endl;
+    cout << "done. " << vec.end() - vec.begin() << endl;
 
     vec.erase(vec.begin(), vec.end());
-    cout << "done" << endl;
+    cout << "done. " << vec.end() - vec.begin() << endl;
 
 
     return 0;
