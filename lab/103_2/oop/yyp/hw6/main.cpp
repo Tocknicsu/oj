@@ -6,16 +6,6 @@
 #include "test3.hpp"
 using namespace std;
 int main() {
-    stable_vector<int> vec;
-    for(int i = 0 ; i < 100 ; i++)
-        vec.push_back(i);
-    for(int i = 0 ; i < 10 ; i++)
-        vec.erase(vec.begin());
-    
-    for(int i = 0 ; i < (int)vec.size() ; i++)
-        cout << vec[i] << ' ';
-    cout << endl;
-    /*
     std::string s = "able was I ere I saw elba";
     stable_vector<int> v1;
     const stable_vector<int> v2(5, 42); // v2 = {42, 42, 42, 42, 42}
@@ -51,6 +41,5 @@ int main() {
 
     u1.swap(u2);                   // u1 = {1, 0, 1, 2, 3, ...}
     std::cout << *it << std::endl; // 1     ^it
-    */
     return 0;
 }
