@@ -1,10 +1,10 @@
-
-void print(stringstream &ss){<br>
-    string str;<br>
-    getline(ss, str);<br>
-    for(int i = 0 ; i < (int)str.size() ; i++)<br>
-        cout << hex << (((int)str[i])&255) << ' ';<br>
-    ss.seekg(0, ss.beg); <br>
-    cout << endl;<br>
-}<br>
-
+```c
+void print(stringstream &ss){
+    string str;
+    getline(ss, str);
+    for(int i = 0 ; i < (int)str.size() ; i++)
+        cout << hex << (((int)str[i])&255) << ' ';
+    ss.seekg(0, ss.beg); 
+    cout << endl;
+}
+```
