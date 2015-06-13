@@ -17,3 +17,7 @@ void print(stringstream &ss){
 
 關於輸出
 ----------
+如果今天你要輸出ASCII碼為{num}的話<br>
+你可以使用跳脫字元 ex: '\x{num}' or "\x{num}" <br>
+或者是直接將他轉為char char({num}) <br>
+
