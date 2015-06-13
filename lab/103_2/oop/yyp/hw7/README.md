@@ -1,4 +1,7 @@
+Hint
+========
 下面這段code可以用來檢查你的serialize有沒有寫對<br>
+
 ```c
 #include <iomanip>
 using namespace std;
@@ -13,5 +16,4 @@ void print(stringstream &ss){
 ```
 
 關於輸出
-==========
-
+----------
