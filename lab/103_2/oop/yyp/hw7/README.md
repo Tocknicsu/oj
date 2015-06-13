@@ -1,3 +1,4 @@
+`
 void print(stringstream &ss){
     string str;
     getline(ss, str);
@@ -6,3 +7,4 @@ void print(stringstream &ss){
     ss.seekg(0, ss.beg);
     cout << endl;
 }
+`
