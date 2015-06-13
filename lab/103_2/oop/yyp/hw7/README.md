@@ -21,3 +21,6 @@ void print(stringstream &ss){
 你可以使用跳脫字元 ex: '\x{num}' or "\x{num}" <br>
 或者是直接將他轉為char char({num}) <br>
 
+舉個例子 如果你要輸出ASCII為123的字元(16進位為7b)<br>
+你可以使用 out << char(123)
+或者 out << '\x7b'
