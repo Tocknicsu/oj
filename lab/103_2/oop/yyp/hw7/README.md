@@ -25,3 +25,15 @@ void print(value &v){
 舉個例子 如果你要輸出ASCII為123的字元(16進位為7b)<br>
 你可以使用 out << char(123)
 或者 out << '\x7b'
+
+Failbit
+------------
+要怎麼使用可以去google<br>
+這邊提示一下<br>
+如果一個stream被拿去deserialize應該變成一個value<br>
+如果你在parse的過程中<br>
+發現tag不符 或者是 數量有少 ex: \0xd3(正常後面應該還要有8個bytes)<br>
+就該設定stream的failbit<br>
+又或者是你按照他給的tag parse完了<br>
+可是這時候stream還沒讀到eof<br>
+就代表他格式也不符 ex: \0xc2\0xc2
