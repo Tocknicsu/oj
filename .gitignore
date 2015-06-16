@@ -1,5 +1,4 @@
 *.exe
 .swp
-
+.out
 hw1.cpp
-pre_mid
