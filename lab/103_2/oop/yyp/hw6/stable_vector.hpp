@@ -44,6 +44,7 @@ class stable_vector {
             (*this) = rhs;
         }
         stable_vector& operator=(const stable_vector& rhs){
+            if( this == &rhs ) return *this;
             while(v.size())
                 pop_back();
             node* now = new node();
