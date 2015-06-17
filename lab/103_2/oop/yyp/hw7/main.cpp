@@ -34,7 +34,6 @@ void print(const value &v){
 }
 int main() {
     using std::int64_t;
-
     // v1 = nil
     puts("part 1");
     const value v1;
