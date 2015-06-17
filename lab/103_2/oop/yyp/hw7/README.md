@@ -61,5 +61,5 @@ db 00 00 00 07 6d 73 67 70 61 63 6b<br>
     str.push_back('c');
     str.push_back('k');
     value _str(str);
-    print(value);
+    print(_str);
 ```
