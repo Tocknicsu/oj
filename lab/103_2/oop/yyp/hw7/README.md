@@ -46,5 +46,7 @@ String
 就要結束<br>
 換句話說<br>
 如果"msg\x00pack"<br>
-serialize之後應開會是<br>
+serialize之後應該會是<br>
 db 00 00 00 03 6d 73 67<br>
+而不是<br>
+db 00 00 00 07 6d 73 67 70 61 63 6b<br>
