@@ -40,7 +40,7 @@ Failbit
 就代表他格式也不符 ex: \0xc2\0xc2
 
 
-String
+String(2.2.4)
 ------------
 關於string在serialize的時候<br>
 如果中途遇到\x00('\0')<br>
