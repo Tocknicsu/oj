@@ -1,4 +1,5 @@
 *.exe
 .swp
 .out
+swp
 hw1.cpp
