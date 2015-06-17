@@ -50,3 +50,16 @@ serialize之後應該會是<br>
 db 00 00 00 03 6d 73 67<br>
 而不是<br>
 db 00 00 00 07 6d 73 67 70 61 63 6b<br>
+```c
+    string str;
+    str.push_back('m');
+    str.push_back('s');
+    str.push_back('g');
+    str.push_back('\0');
+    str.push_back('p');
+    str.push_back('a');
+    str.push_back('c');
+    str.push_back('k');
+    value _str(str);
+    print(value);
+```
