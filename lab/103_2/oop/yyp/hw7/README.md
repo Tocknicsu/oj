@@ -34,7 +34,7 @@ Failbit
 如果你在parse的過程中<br>
 發現tag不符 或者是 數量有少 ex: \0xd3(正常後面應該還要有8個bytes)<br>
 就該設定stream的failbit<br>
-~~~~以下不確定 已寄信去問助教了~~~~
+====以下不確定 已寄信去問助教了====<br>
 又或者是你按照他給的tag parse完了<br>
 可是這時候stream還沒讀到eof<br>
 就代表他格式也不符 ex: \0xc2\0xc2
