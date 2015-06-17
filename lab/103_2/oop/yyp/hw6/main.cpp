@@ -3,9 +3,29 @@
 #include <iostream>
 #include <string>
 
-#include "test3.hpp"
+#include "stable_vector.hpp"
 using namespace std;
 int main() {
+    /*
+    stable_vector<int> vec;
+    for(int i = 0 ; i < 10 ; i++){
+        vec.push_back(i);
+    }
+    stable_vector<int>::iterator it = vec.begin();
+    cout << it[4] << endl;
+    it[4] = 3;
+    stable_vector<int>::const_iterator cit = vec.begin();
+    cout << cit[4] << endl;
+    */
+    stable_vector<int> vec;
+    for(int i = 0 ; i < 10 ; i++)
+        vec.push_back(i);
+    stable_vector<int>::iterator it = vec.begin() + 5;
+    
+    cout << *it << endl;
+    vec.insert(it, 3);
+    cout << *it << endl;
+    /*
     std::string s = "able was I ere I saw elba";
     stable_vector<int> v1;
     const stable_vector<int> v2(5, 42); // v2 = {42, 42, 42, 42, 42}
@@ -42,4 +62,5 @@ int main() {
     u1.swap(u2);                   // u1 = {1, 0, 1, 2, 3, ...}
     std::cout << *it << std::endl; // 1     ^it
     return 0;
+    */
 }
