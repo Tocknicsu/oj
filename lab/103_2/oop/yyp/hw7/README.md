@@ -50,7 +50,7 @@ serialize之後應該會是<br>
 db 00 00 00 03 6d 73 67<br>
 而不是<br>
 db 00 00 00 07 6d 73 67 70 61 63 6b<br>
-```c
+```c++
     string str;
     str.push_back('m');
     str.push_back('s');
