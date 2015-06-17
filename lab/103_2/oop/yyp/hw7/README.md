@@ -37,3 +37,14 @@ Failbit
 又或者是你按照他給的tag parse完了<br>
 可是這時候stream還沒讀到eof<br>
 就代表他格式也不符 ex: \0xc2\0xc2
+
+
+String
+------------
+關於string在serialize的時候<br>
+如果中途遇到\x00('\0')<br>
+就要結束<br>
+換句話說<br>
+如果"msg\x00pack"<br>
+serialize之後應開會是<br>
+db 00 00 00 03 6d 73 67<br>

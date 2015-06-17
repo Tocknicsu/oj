@@ -13,7 +13,25 @@
 #include <time.h>
 #include <iomanip>
 using namespace std;
+void print(value &v){
+    stringstream ss;
+    v.serialize(ss);
+    string str;
+    getline(ss, str);
+    for(int i = 0 ; i < (int)str.size() ; i++)
+        cout << setw(2) << setfill('0') << hex << (((int)str[i])&255) << ' ';
+    cout << endl;
+}
 
+void print(const value &v){
+    stringstream ss;
+    v.serialize(ss);
+    string str;
+    getline(ss, str);
+    for(int i = 0 ; i < (int)str.size() ; i++)
+        cout << setw(2) << setfill('0') << hex << (((int)str[i])&255) << ' ';
+    cout << endl;
+}
 int main() {
     using std::int64_t;
 
@@ -178,6 +196,8 @@ int main() {
         std::stringstream ss;
         v6.serialize(ss);
         const value v = value::deserialize(ss);
+        print(v6);
+
         assert(v == v6);
         puts("part 14");
     }
