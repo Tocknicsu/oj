@@ -1,0 +1,23 @@
+The Purple Duke
+5
+Jake's Frisco Al Fresco
+4
+Mont Souffle
+ 6
+Gertie's Eats
+ 3
+
+Time To eat
+5.1
+Jake's Pub
+4.3
+The Music
+5.2
+Francaise wine
+3.8
+Jam Pub
+ 4.1
+Musical Time
+8.9
+Chocolate Sweets
+9.8

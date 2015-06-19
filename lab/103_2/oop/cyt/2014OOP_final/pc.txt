@@ -1,0 +1,17 @@
+apple 10
+banana 5
+orange 20
+watermalon 50
+lemon 15
+alan
+3
+apple 2
+banana 3
+orange 1
+lisa
+1
+watermalon 2
+dog
+2
+lemon 2
+orange 3
