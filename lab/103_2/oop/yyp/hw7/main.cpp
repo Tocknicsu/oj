@@ -196,6 +196,7 @@ int main() {
         v6.serialize(ss);
         const value v = value::deserialize(ss);
         print(v6);
+        print(v);
 
         assert(v == v6);
         puts("part 14");

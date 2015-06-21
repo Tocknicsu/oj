@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+struct matrix{
+    int sz;
+    ll v[220][220];
+    matrix(int sz, bool is_i = false){
+        for(int i = 0 ; i < sz ; i++)
+            for(int j = 0 ; j < sz ; j++)
+                v[i][j] = i == j ? is_i : 0;
+    }
+    matrix operator*(const matrix& b) const {
+        matrix re(sz);
+        for(int i = 0 ; i < sz ; i++){
+            for(int j = 0 ; j < sz ; j++){
+                for(int k = 0 ; k < sz ; k++)
+                    re.v[i][j] += v[i][k] * b.v[k][j];
+            }
+        }
+        return re;
+    }
+    matrix operator^(const int &k) const {
+        matrix re(sz, true);
+        matrix tmp = (*this);
+        int t = k;
+        while(t){
+            if(t&1)
+                re = re * tmp;
+            tmp = tmp * tmp;
+            t >>= 1;
+        }
+        return re;
+    }
+    void print(){
+        for(int i = 0 ; i < sz ; i++){
+            for(int j = 0 ; j < sz ; j++)
+                cout << v[i][j] << ' ';
+            cout << endl;
+        }
+    }
+};
+void Solve(){
+    int n, m, k, q;
+    cin >> n >> m >> k >> q;
+    matrix basic(n);
+    for(int i = 0 ; i < m ; i++){
+        int a, b, c;
+        cin >> a >> b >> c;
+        cout << a << ' ' << b << ' ' << c << endl;
+        basic.v[a][b] += c;
+    }
+    basic.print();
+}
+int main(){
+    ios_base::sync_with_stdio(0), cin.tie(0);
+    int n;
+    cin >> n;
+    while(n--)
+        Solve();
+    return 0;
+}
