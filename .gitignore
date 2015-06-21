@@ -1,5 +1,3 @@
-*.exe
-.swp
-.out
+exe
 swp
-hw1.cpp
+out
