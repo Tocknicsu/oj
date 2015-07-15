@@ -20,6 +20,7 @@ namespace DS{
     void merge(int x, int y){
         x = find(x);
         y = find(y);
+        if(x == y) return;
         under_sz[x] += stack_sz[y];
         stack_sz[y] += stack_sz[x];
         stack_sz[x] = 0;
@@ -41,14 +42,8 @@ int main(){
             DS::merge(a, b);
         } else {
             cin >> a;
+            DS::find(a);
             cout << DS::under_sz[a] << endl;
         }
-        for(int i = 0 ; i < 10 ; i++) DS::find(i);
-        for(int i = 0 ; i < 10 ; i++)
-            cout << DS::stack_sz[i] << ' ';
-        cout << endl;
-        for(int i = 0 ; i < 10 ; i++)
-            cout << DS::under_sz[i] << ' ';
-        cout << endl;
     }
 }
