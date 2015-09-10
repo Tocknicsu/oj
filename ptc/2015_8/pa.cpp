@@ -51,8 +51,8 @@ int main(){
                 m = max(m, adj[j][i]);
             vy[i] = m;
         }
-        memset(mx, -1, sizeof(mx));
-        memset(my, -1, sizeof(my));
+        memset(mx, INF, sizeof(mx));
+        memset(my, INF, sizeof(my));
         for(int i = 1 ; i <= n ; i++){
             while(1){
                 memset(visx, 0, sizeof(visx));
