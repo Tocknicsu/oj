@@ -1,50 +1,39 @@
 #include <iostream>
 using namespace std;
+int m[20][20] = {};
+int D[4][2] = {{-1,1},{0, 1},{1, 1},{1, 0}};
+bool ok(int x, int y, int k, int d, int l){
+    if(x < 0 || y < 0 || x > 19 || y > 19) return false;
+    if(m[x][y] != k) return false;
+    if(l == 0){
+        int nx = x - D[d][0];
+        int ny = y - D[d][1];
+        if(nx < 0 || ny < 0 || nx > 19 || ny > 19){
+        } else {
+            if(m[nx][ny] == k)
+                return false;
+        }
+    }
+    if(l == 5) return m[x][y] == k;
+    if(l == 4)
+        return !ok(x+D[d][0], y+D[d][1], k, d, l+1);
+    return ok(x+D[d][0], y+D[d][1], k, d, l+1);
+}
 
 void Solve(){
-    int x[20][20] = {};
-    for(int i = 1 ; i < 20 ; i++)
-        for(int j = 1 ; j < 20 ; j++)
-            cin >> x[i][j];
-    for(int i = 1 ; i < 20 ; i++)
-        for(int j = 1 ; j < 20 ; j++){
-            bool end = false;
-            if(x[i][j]){
-                if(i<=15){
-                    bool tmp = true;
-                    for(int k = 0 ; k < 5 ; k++)
-                        if(x[i][j] != x[i+k][j])
-                            tmp = false;
-                    end |= tmp;
-                }
-                if(j<=15){
-                    bool tmp = true;
-                    for(int k = 0 ; k < 5 ; k++)
-                        if(x[i][j] != x[i][j+k])
-                            tmp = false;
-                    end |= tmp;
-                }
-                if(i<=15 && j <=15){
-                    bool tmp = true;
-                    for(int k = 0 ; k < 5 ; k++)
-                        if(x[i][j] != x[i+k][j+k])
-                            tmp = false;
-                    end |= tmp;
-                }
-                if(i>=4 && j <=15){
-                    bool tmp = true;
-                    for(int k = 0 ; k < 5 ; k++)
-                        if(x[i][j] != x[i-k][j+k])
-                            tmp = false;
-                    end |= tmp;
+    for(int i = 0 ; i < 19 ; i++)
+        for(int j = 0 ; j < 19 ; j++)
+            cin >> m[i][j];
+    for(int k = 1 ; k < 3 ; k++)
+        for(int i = 0 ; i < 19 ; i++)
+            for(int j = 0 ; j < 19 ; j++){
+                for(int d = 0 ; d < 4 ; d++)
+                if(ok(i, j, k, d, 0)){
+                    cout << k << endl;
+                    cout << i + 1 << ' ' << j + 1 << endl;
+                    return;
                 }
             }
-            if(end){
-                cout << x[i][j] << endl;
-                cout << i << ' ' << j << endl;
-                return;
-            }
-        }
     cout << 0 << endl;
     return;
 }
