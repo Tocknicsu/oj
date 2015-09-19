@@ -1,9 +1,22 @@
+/*
+照著題目講的做
+*/
+
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-void GG(){
+void die(){
     cout << "TLE" << endl;
     exit(0);
+}
+void mpow(ll x, ll y, ll m){
+    ll now = 1;
+    for(int i = 0 ; i < y ; i++){
+        now *= x;
+        if(now > m)
+            die();
+    }
 }
 int main(){
     ll m, n, t, now = 1;
@@ -12,38 +25,22 @@ int main(){
         for(ll i = 1 ; i <= n ; i++){
             now *= i;
             if(now > m)
-                GG();
+                die();
         }
     } else if(t == 2){
-        for(ll i = 1 ; i <= n ; i++){
-            now *= 2;
-            if(now > m)
-                GG();
-        }
+        mpow(2, n, m);
     } else if(t == 3){
-        for(ll i = 0 ; i < 4 ; i++){
-            now *= n;
-            if(now > m)
-                GG();
-        }
+        mpow(n, 4, m);
     } else if(t == 4){
-        for(ll i = 0 ; i < 3 ; i++){
-            now *= n;
-            if(now > m)
-                GG();
-        }
+        mpow(n, 3, m);
     } else if(t == 5){
-        for(ll i = 0 ; i < 2 ; i++){
-            now *= n;
-            if(now > m)
-                GG();
-        }
+        mpow(n, 2, m);
     } else if(t == 6){
         if(double(n) * double(log2(n)) > m)
-            GG();
+            die();
     } else if(t == 7){
         if(n > m)
-            GG();
+            die();
     }
     cout << "AC" << endl;
 }

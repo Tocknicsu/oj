@@ -1,3 +1,7 @@
+/*
+給定二維最標點
+求曼哈頓距離的MST
+*/
 #include <bits/stdc++.h>
 using namespace std;
 #define f first

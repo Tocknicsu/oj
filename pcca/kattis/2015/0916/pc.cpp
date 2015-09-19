@@ -1,3 +1,10 @@
+/*
+給定一張有向圖
+問從s->t的最短路徑有幾條
+
+解題概念：DP
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 #define f first
@@ -16,7 +23,6 @@ int main(){
         int a, b, c;;
         cin >> a >> b >> c;
         ed[a].push_back(PII(b, c));
-        //ed[b].push_back(PII(a, c));
     }
     int start, end;
     cin >> start >> end;
