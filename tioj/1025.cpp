@@ -18,7 +18,6 @@ void print(){
     printf("\n");
 }
 int dfs(int p){
-    print();
     if( p == (int)v.size() ){
         print();
         return 1;
@@ -42,9 +41,10 @@ int main(){
             int x;
             scanf("%d", &x);
             t[i][j] = x;
-            row[i][x-1] = col[j][x-1] = sqr[to_sqr(i, j)][x-1] = 1;
             if(!x)
                 v.push_back(PII(i, j));
+            else
+                row[i][x-1] = col[j][x-1] = sqr[to_sqr(i, j)][x-1] = 1;
         }
     printf("there are a total of %d solution(s).\n", dfs(0));
 }
