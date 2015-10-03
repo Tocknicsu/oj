@@ -46,9 +46,12 @@ unsigned long long go(ll a, ll b){
 
 int main(){
     ll a, b;
+    bool first = true;
     while(scanf("%lld%lld", &a, &b), a || b){
+        if(first) first = false;
+        else printf("\n");
         memset(ans, 0, sizeof(ans));
-        printf("%llu\n", go(a, b));
+        printf("%llu", go(a, b));
     }
 
     return 0;
