@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef unsigned long long ll;
+typedef long long ll;
 ll tri[64][64];
 ll ans[64];
 
@@ -37,8 +37,8 @@ void add(ll a, int b){
 ll go(ll a, ll b){
     add(b, 1);
     add(a-1, -1);
-    ll x = 2;
-    ll re = 0;
+    unsigned long long x = 2;
+    unsigned long long re = 0;
     for(int i = 0 ; i < 64 ; i++, x *= 2)
         re += ans[i] * x;
     return re;
