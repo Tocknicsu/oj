@@ -35,12 +35,15 @@ void add(ll a, int b){
     }
 }
 unsigned long long go(ll a, ll b){
+    memset(ans, 0, sizeof(ans));
     add(b, 1);
     add(a-1, -1);
     unsigned long long x = 2;
     unsigned long long re = 0;
     for(int i = 0 ; i < 64 ; i++, x *= 2)
         re += ans[i] * x;
+    if(a == 0)
+        re++;
     return re;
 }
 
@@ -50,7 +53,6 @@ int main(){
     while(scanf("%lld%lld", &a, &b), a || b){
         if(first) first = false;
         else printf("\n");
-        memset(ans, 0, sizeof(ans));
         printf("%llu", go(a, b));
     }
 
