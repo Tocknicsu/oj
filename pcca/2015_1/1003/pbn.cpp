@@ -34,7 +34,7 @@ void add(ll a, int b){
         t--;
     }
 }
-ll go(ll a, ll b){
+unsigned long long go(ll a, ll b){
     add(b, 1);
     add(a-1, -1);
     unsigned long long x = 2;
@@ -48,7 +48,7 @@ int main(){
     ll a, b;
     while(scanf("%lld%lld", &a, &b), a || b){
         memset(ans, 0, sizeof(ans));
-        printf("%lld\n", go(a, b));
+        printf("%llu\n", go(a, b));
     }
 
     return 0;
