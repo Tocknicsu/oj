@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+typedef unsigned long long ll;
 ll tri[64][64];
 ll ans[64];
 
@@ -20,13 +20,13 @@ void add(ll a, int b){
     a++;
     while(1ll << (t) <= a)++t;
     t--;
-    for(int i = 1 ; i <= t ; i++)
+    for(ll i = 1 ; i <= t ; i++)
         ans[i-1] += C(t, i) * b;
     a -= (1ll << (t));
     int c = 0;
     while(a){
         if(a >= (1ll << t)){
-            for(int i = 0 ; i <= t ; i++)
+            for(ll i = 0 ; i <= t ; i++)
                 ans[i+c] += C(t, i) * b;
             c++;
             a -= (1ll << t);
@@ -46,7 +46,7 @@ ll go(ll a, ll b){
 
 int main(){
     ll a, b;
-    while(scanf("%lld%lld", &a, &b), a && b){
+    while(scanf("%lld%lld", &a, &b), a || b){
         memset(ans, 0, sizeof(ans));
         printf("%lld\n", go(a, b));
     }
