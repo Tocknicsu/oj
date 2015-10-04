@@ -16,8 +16,7 @@ int main(){
         }
         ans[i] = s.size();
     }
-    freopen("pa.out.2", "w", stdout);
-    for(int i = 1 ; i < 1001 ; i++)
+    for(int i = 1 ; i < 101 ; i++)
         printf("%d\n", ans[i]);
     return 0;
     int n;
