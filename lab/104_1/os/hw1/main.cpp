@@ -14,17 +14,24 @@ string get_cwd(){
     getcwd(buffer, 1024);
     return string(buffer);
 }
-void parse_cmd(string str){
+vector<string> parse_cmd(string str){
+    cout << "===== cmd parse start =====" << endl;
+    cout << "command: " << str << endl;
+    cout << "===== cmd parse end =====" << endl;
+    vector<string> cmd;
+    return cmd;
 }
 
 int main(){
     cout << "Welcome to mysh by 0316239!" << endl;
     while(1){
-        string cmd;
         cout << get_username() << ' ' << get_cwd() << endl;
-        printf("mysh> ");
-        getline(cin, cmd);
-        parse_cmd(cmd);
+        cout << "mysh> ";
+
+        string str;
+        getline(cin, str);
+        system(str.c_str())
+        //vector<string> p_cmd = parse_cmd(str);
     }
 
     return 0;
