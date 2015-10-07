@@ -1,14 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define MOD 1000000007
+#define MOD 1000000007ll
 typedef long long ll;
 ll st[512];
-int Solve(){
+ll Solve(){
     int n, k, p;
     scanf("%d%d%d", &n, &k, &p);
     ll t[512][512] = {};
     t[k][0] = 1;
     ll ans = 0;
+    if(k+1 == p){
+        return st[n-1];
+    }
     for(int i = 1 ; i <= n ; i++){
         t[k][i] = i != p;
         if(i > p){
@@ -37,7 +40,7 @@ int Solve(){
                 }
             }
         }
-        ans += (tmp * st[(n-d-1)]) % MOD;
+        ans += ((tmp * st[(n-d-1)]) % MOD);
         ans %= MOD;
     }
     return ans;
@@ -49,6 +52,6 @@ int main(){
     int n;
     scanf("%d", &n);
     for(int i = 1 ; i <= n ; i++){
-        printf("Case #%d: %d\n", i, Solve());
+        printf("Case #%d: %lld\n", i, Solve());
     }
 }
