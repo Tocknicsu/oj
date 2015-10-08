@@ -14,11 +14,25 @@ string get_cwd(){
     getcwd(buffer, 1024);
     return string(buffer);
 }
-vector<string> parse_cmd(string str){
+vector<string> parse_cmd(string &str){
     cout << "===== cmd parse start =====" << endl;
     cout << "command: " << str << endl;
     cout << "===== cmd parse end =====" << endl;
     vector<string> cmd;
+    cmd.push_back("");
+    for(int i = 0 ; i < (int)str.size() ; i++){
+        if(str[i] == ' '){
+            if(cmd.back().size()){
+                cmd.push_back("");
+            }
+        } else if (str[i] == '|') {
+            str = str.substr(i, str.size()-i);
+            return cmd;
+        } else {
+            cmd.back().push_back(str[i]);
+        }
+    }
+    
     return cmd;
 }
 
@@ -27,12 +41,14 @@ int main(){
     while(1){
         cout << get_username() << ' ' << get_cwd() << endl;
         cout << "mysh> ";
-
         string str;
         getline(cin, str);
-        system(str.c_str())
-        //vector<string> p_cmd = parse_cmd(str);
+        vector<string> p_cmd = parse_cmd(str);
+
+
+        
     }
+    cout << "Bye~" << endl;
 
     return 0;
 }
