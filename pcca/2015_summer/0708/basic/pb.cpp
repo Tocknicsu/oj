@@ -44,7 +44,7 @@ void Solve(int n){
 }
 
 int main(){
-    freopen("pb.in", "r", stdin);
+    //freopen("pb.in", "r", stdin);
     ios_base::sync_with_stdio(0), cin.tie(0);
     int n;
     int cases = 0;
@@ -53,4 +53,5 @@ int main(){
         Solve(n);
         cout << endl;
     }
+    //return 0;
 }

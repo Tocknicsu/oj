@@ -32,10 +32,11 @@ int main(){
     for(int i = 0 ; i < n ; i++){
         int x, y;
         scanf("%d%d", &x, &y);
+        if(m[x][y].s != -1) continue;
         m[x][y] = PII(0, i);
         Q.push(PII(x,y));
     }
-    int ans = 0;
+    long long ans = 0;
     while(Q.size()){
         int x = Q.front().f;
         int y = Q.front().s;
@@ -55,6 +56,6 @@ int main(){
             }
         }
     }
-    cout << ans << endl;
+    cout << ans;
     return 0;
 }
