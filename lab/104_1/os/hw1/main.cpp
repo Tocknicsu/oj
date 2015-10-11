@@ -60,7 +60,7 @@ void prompt(){
     timeinfo = localtime (&rawtime);
     strftime (time_buffer,80,"%Y-%m-%d %H-%M-%S",timeinfo);
 
-    cerr 
+    cout 
         << "┌─[" << set_color("azure", "", get_username(), 1, 1) << "]" << 
         " - [" << set_color("yellow", "", get_cwd(), 1, 1) << "]" << 
         " - [" << set_color("yellow", "", time_buffer, 1, 1) << "]" << endl
@@ -103,7 +103,7 @@ vector<string> parse_single_cmd(string str){
 }
 void signal_handler_SIGINT(int sig){
     last_status = 1;
-    cerr << endl;
+    cout << endl;
     prompt();
 }
 void WAIT(int pid){
@@ -116,9 +116,9 @@ void WAIT(int pid){
         all_process.erase(m_pid);
     }
     if(WIFSIGNALED(status) || WIFSTOPPED(status))
-        cerr << endl;
+        cout << endl;
     if(WIFSTOPPED(status) && WSTOPSIG(status)==SIGTSTP)
-        cerr << "For recovery: fg " << pid << endl;
+        cout << "For recovery: fg " << pid << endl;
     last_status = WEXITSTATUS(status);
 }
 void signal_handler_SIGCHLD(int sig){
@@ -128,15 +128,17 @@ void signal_handler_SIGCHLD(int sig){
     process[getpgid(pid)]--;
 }
 void signal_handler_SIGTSTP(int sig){
+    cout << endl;
+    prompt();
 }
 void my_exit(){
     int status;
     for(set<int>::iterator it = all_process.begin() ; it != all_process.end() ; ++it){
-        cerr << "kill pid: " << *it << endl;
+        cout << "kill pid: " << *it << endl;
         kill(*it, SIGINT);
         waitpid(*it, &status, 0);
     }
-    cerr << "Goodbye!" << endl;
+    cout << "Goodbye!" << endl;
     exit(0);
 }
 bool internal(string str){
@@ -144,7 +146,7 @@ bool internal(string str){
     if(cmd[0] == string("cd")){
         if(cmd.size() > 1){
             if(chdir(cmd[1].c_str()))
-                cerr << "No Directory: " << cmd[1] << endl;
+                cout << "No Directory: " << cmd[1] << endl;
         } else {
             chdir(getenv("HOME"));
         }
@@ -175,7 +177,7 @@ int external(string str){
     }
     args[cmd.size()] = 0;
     if(execvp(cmd[0].c_str(), args)){
-        cerr << "Command not found: " << cmd[0] << endl;
+        cout << "Command not found: " << cmd[0] << endl;
     }
     for(int i = 0 ; i < (int)cmd.size() ; i++)
         delete [] args[i];
@@ -217,14 +219,15 @@ void do_command(string str){
                 external(p_cmd[i]);
             }
             /* for beauty */
-            if(i == (int)p_cmd.size()-1)
-                cerr << "├─" << set_color("azure", "", "", 0, 1) << "[" << pid << "] ";
+            if(i != (int)p_cmd.size()-1)
+                cout << "├─";
             else
-                cerr << "└─" << set_color("azure", "", "", 0, 1) << "[" << pid << "] ";
+                cout << "└─";
+            cout << set_color("azure", "", "", 0, 1) << "[" << pid << "] - [" << getpgid(pid) << "] ";
             vector<string> cmds = parse_single_cmd(p_cmd[i]);
             for(int j = 0 ; j < (int)cmds.size() ; j++)
-                cerr << cmds[j] << ' ';
-            cerr << set_color("", "", "", 1) << endl;
+                cout << cmds[j] << ' ';
+            cout << set_color("", "", "", 1) << endl;
             /* for beauty */
         }
         tcsetpgrp(STDIN_FILENO, first_pid);
@@ -232,7 +235,7 @@ void do_command(string str){
             close(pip[i][0]), close(pip[i][1]);
         process[first_pid] = p_cmd.size();
         /*
-        cerr << "└─" << set_color("azure", "", "", 0, 1) << "[" << first_pid << "] - [" << getpgid(first_pid) << "]"  << endl << set_color("");
+        cout << "└─" << set_color("azure", "", "", 0, 1) << "[" << first_pid << "] - [" << getpgid(first_pid) << "]"  << endl << set_color("");
         */
         if(!background)
             WAIT(first_pid);
@@ -240,7 +243,7 @@ void do_command(string str){
     }
 }
 int main(){
-    cerr << "Welcome to mysh by 0316239!" << endl;
+    cout << "Welcome to mysh by 0316239!" << endl;
     signal(SIGINT, &signal_handler_SIGINT);
     signal(SIGTSTP, &signal_handler_SIGTSTP);
     signal(SIGCHLD, &signal_handler_SIGCHLD);
