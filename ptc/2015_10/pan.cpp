@@ -29,7 +29,7 @@ void Solve(){
         nsy = min(sy, ey);
         ney = max(sy, ey);
         x.push_back(sx); x.push_back(ex);
-        y.push_back(sy); x.push_back(ey);
+        y.push_back(sy); y.push_back(ey);
         s.push_back(S(1, nsx, nsy, ney));
         s.push_back(S(-1, nex, nsy, ney));
     }
