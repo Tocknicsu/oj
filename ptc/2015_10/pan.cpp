@@ -58,7 +58,6 @@ void Solve(){
     printf("%d\n", ans);
 }
 int main(){
-    freopen("pa.in", "r", stdin);
     int n;
     scanf("%d", &n);
     while(n--)
