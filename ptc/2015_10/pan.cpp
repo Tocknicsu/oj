@@ -37,14 +37,14 @@ void Solve(){
     x.resize(unique(ALL(x))-x.begin());
     y.resize(unique(ALL(y))-y.begin());
     for(int i = 1 ; i < (int)x.size() ; i++){
-        s.push_back(S(0, x[i], 0, 0));
+        s.push_back(S(2, x[i], 0, 0));
     }
     sort(ALL(s));
     int ans = 0;
     map<int, int> m;
     for(int i = 0 ; i < (int)s.size() ; i++){
         S &tmp = s[i];
-        if(tmp.t != 0){
+        if(tmp.t != 2){
             m[tmp.sy]+=tmp.t;
             m[tmp.ey]-=tmp.t;
         } else {
