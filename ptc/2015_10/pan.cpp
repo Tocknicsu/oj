@@ -35,7 +35,6 @@ void Solve(){
     }
     sort(ALL(x)); sort(ALL(y));
     x.resize(unique(ALL(x))-x.begin());
-    y.resize(unique(ALL(y))-y.begin());
     for(int i = 1 ; i < (int)x.size() ; i++){
         s.push_back(S(2, x[i], 0, 0));
     }

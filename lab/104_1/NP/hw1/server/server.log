@@ -1,0 +1,46 @@
+[2105/09/17 13:17:22] [29757] =====Server Start=====
+[2105/09/17 13:17:22] [29757] Succ: Server socket create.
+[2105/09/17 13:17:22] [29757] Succ: Set socket option.
+[2105/09/17 13:17:34] [29757] Connected127.0.0.1
+[2105/09/17 13:18:04] [29757] Connected127.0.0.1
+[2105/09/17 13:18:11] [29757] [Stdin]exit
+[2105/09/17 13:18:11] [29757] =====Server End=====
+[2105/09/17 13:55:17] [1222] =====Server Start=====
+[2105/09/17 13:55:17] [1222] Succ: Server socket create.
+[2105/09/17 13:55:17] [1222] Succ: Set socket option.
+[2105/09/17 13:55:18] [1222] [Stdin]exit
+[2105/09/17 13:55:18] [1222] =====Server End=====
+[2105/10/16 11:06:14] [22850] =====Server Start=====
+[2105/10/16 11:06:14] [22850] Succ: Server socket create.
+[2105/10/16 11:06:14] [22850] Succ: Set socket option.
+[2105/10/16 11:10:47] [23780] =====Server Start=====
+[2105/10/16 11:10:47] [23780] Succ: Server socket create.
+[2105/10/16 11:10:47] [23780] Succ: Set socket option.
+[2105/10/16 11:10:47] [23780] =====Server End=====
+[2105/10/16 11:12:28] [24340] =====Server Start=====
+[2105/10/16 11:12:28] [24340] Succ: Server socket create.
+[2105/10/16 11:12:28] [24340] Succ: Set socket option.
+[2105/10/16 11:12:28] [24340] =====Server End=====
+[2105/10/16 11:12:40] [24463] =====Server Start=====
+[2105/10/16 11:12:40] [24463] Succ: Server socket create.
+[2105/10/16 11:12:40] [24463] Succ: Set socket option.
+[2105/10/16 11:12:40] [24463] =====Server End=====
+[2105/10/16 11:18:59] [25044] =====Server Start=====
+[2105/10/16 11:18:59] [25044] Succ: Server socket create.
+[2105/10/16 11:18:59] [25044] Succ: Set socket option.
+[2105/10/16 11:18:59] [25044] =====Server End=====
+[2105/10/16 11:28:11] [25890] =====Server Start=====
+[2105/10/16 11:28:12] [25890] Succ: Server socket create.
+[2105/10/16 11:28:12] [25890] Succ: Set socket option.
+[2105/10/16 11:29:38] [26111] =====Server Start=====
+[2105/10/16 11:29:38] [26111] Succ: Server socket create.
+[2105/10/16 11:29:38] [26111] Succ: Set socket option.
+[2105/10/16 15:41:28] [29928] =====Server Start=====
+[2105/10/16 15:41:28] [29928] Succ: Server socket create.
+[2105/10/16 15:41:28] [29928] Succ: Set socket option.
+[2105/10/16 20:20:25] [3811] =====Server Start=====
+[2105/10/16 20:20:26] [3811] Succ: Server socket create.
+[2105/10/16 20:20:26] [3811] Succ: Set socket option.
+[2105/10/19 16:01:58] [12032] =====Server Start=====
+[2105/10/19 16:01:58] [12032] Succ: Server socket create.
+[2105/10/19 16:01:58] [12032] Succ: Set socket option.
