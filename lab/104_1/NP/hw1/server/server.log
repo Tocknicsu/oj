@@ -1,46 +1,163 @@
-[2105/09/17 13:17:22] [29757] =====Server Start=====
-[2105/09/17 13:17:22] [29757] Succ: Server socket create.
-[2105/09/17 13:17:22] [29757] Succ: Set socket option.
-[2105/09/17 13:17:34] [29757] Connected127.0.0.1
-[2105/09/17 13:18:04] [29757] Connected127.0.0.1
-[2105/09/17 13:18:11] [29757] [Stdin]exit
-[2105/09/17 13:18:11] [29757] =====Server End=====
-[2105/09/17 13:55:17] [1222] =====Server Start=====
-[2105/09/17 13:55:17] [1222] Succ: Server socket create.
-[2105/09/17 13:55:17] [1222] Succ: Set socket option.
-[2105/09/17 13:55:18] [1222] [Stdin]exit
-[2105/09/17 13:55:18] [1222] =====Server End=====
-[2105/10/16 11:06:14] [22850] =====Server Start=====
-[2105/10/16 11:06:14] [22850] Succ: Server socket create.
-[2105/10/16 11:06:14] [22850] Succ: Set socket option.
-[2105/10/16 11:10:47] [23780] =====Server Start=====
-[2105/10/16 11:10:47] [23780] Succ: Server socket create.
-[2105/10/16 11:10:47] [23780] Succ: Set socket option.
-[2105/10/16 11:10:47] [23780] =====Server End=====
-[2105/10/16 11:12:28] [24340] =====Server Start=====
-[2105/10/16 11:12:28] [24340] Succ: Server socket create.
-[2105/10/16 11:12:28] [24340] Succ: Set socket option.
-[2105/10/16 11:12:28] [24340] =====Server End=====
-[2105/10/16 11:12:40] [24463] =====Server Start=====
-[2105/10/16 11:12:40] [24463] Succ: Server socket create.
-[2105/10/16 11:12:40] [24463] Succ: Set socket option.
-[2105/10/16 11:12:40] [24463] =====Server End=====
-[2105/10/16 11:18:59] [25044] =====Server Start=====
-[2105/10/16 11:18:59] [25044] Succ: Server socket create.
-[2105/10/16 11:18:59] [25044] Succ: Set socket option.
-[2105/10/16 11:18:59] [25044] =====Server End=====
-[2105/10/16 11:28:11] [25890] =====Server Start=====
-[2105/10/16 11:28:12] [25890] Succ: Server socket create.
-[2105/10/16 11:28:12] [25890] Succ: Set socket option.
-[2105/10/16 11:29:38] [26111] =====Server Start=====
-[2105/10/16 11:29:38] [26111] Succ: Server socket create.
-[2105/10/16 11:29:38] [26111] Succ: Set socket option.
-[2105/10/16 15:41:28] [29928] =====Server Start=====
-[2105/10/16 15:41:28] [29928] Succ: Server socket create.
-[2105/10/16 15:41:28] [29928] Succ: Set socket option.
-[2105/10/16 20:20:25] [3811] =====Server Start=====
-[2105/10/16 20:20:26] [3811] Succ: Server socket create.
-[2105/10/16 20:20:26] [3811] Succ: Set socket option.
-[2105/10/19 16:01:58] [12032] =====Server Start=====
-[2105/10/19 16:01:58] [12032] Succ: Server socket create.
-[2105/10/19 16:01:58] [12032] Succ: Set socket option.
+[2105/10/20 09:33:21] [21773] =====Server Start=====
+[2105/10/20 09:33:22] [21773] Succ: Server socket create.
+[2105/10/20 09:33:22] [21773] Succ: Set socket option.
+[2105/10/20 09:33:22] [21773] Waiting connect...
+[2105/10/20 09:33:24] [21773] Connected127.0.0.1
+[2105/10/20 09:36:28] [22237] =====Server Start=====
+[2105/10/20 09:36:28] [22237] Succ: Server socket create.
+[2105/10/20 09:36:28] [22237] Succ: Set socket option.
+[2105/10/20 09:36:28] [22237] Waiting connect...
+[2105/10/20 09:36:30] [22237] Connected127.0.0.1
+[2105/10/20 09:38:08] [22627] =====Server Start=====
+[2105/10/20 09:38:08] [22627] Succ: Server socket create.
+[2105/10/20 09:38:08] [22627] Succ: Set socket option.
+[2105/10/20 09:38:08] [22627] Waiting connect...
+[2105/10/20 09:38:09] [22627] Connected127.0.0.1
+[2105/10/20 10:16:55] [23630] =====Server Start=====
+[2105/10/20 10:16:56] [23630] Succ: Server socket create.
+[2105/10/20 10:16:56] [23630] Succ: Set socket option.
+[2105/10/20 10:16:56] [23630] Waiting connect...
+[2105/10/20 10:16:57] [23630] Connected127.0.0.1
+[2105/10/20 10:17:35] [23723] =====Server Start=====
+[2105/10/20 10:17:35] [23723] Succ: Server socket create.
+[2105/10/20 10:17:35] [23723] Succ: Set socket option.
+[2105/10/20 10:17:35] [23723] Waiting connect...
+[2105/10/20 10:17:43] [23723] Connected127.0.0.1
+[2105/10/20 10:19:20] [23865] =====Server Start=====
+[2105/10/20 10:19:20] [23865] Succ: Server socket create.
+[2105/10/20 10:19:20] [23865] Succ: Set socket option.
+[2105/10/20 10:19:20] [23865] Waiting connect...
+[2105/10/20 10:19:22] [23865] Connected127.0.0.1
+[2105/10/20 10:19:57] [23948] =====Server Start=====
+[2105/10/20 10:19:57] [23948] Succ: Server socket create.
+[2105/10/20 10:19:57] [23948] Succ: Set socket option.
+[2105/10/20 10:19:57] [23948] Waiting connect...
+[2105/10/20 10:19:57] [23948] Connected127.0.0.1
+[2105/10/20 10:36:19] [24188] =====Server Start=====
+[2105/10/20 10:36:19] [24188] Succ: Server socket create.
+[2105/10/20 10:36:19] [24188] Succ: Set socket option.
+[2105/10/20 10:36:19] [24188] Waiting connect...
+[2105/10/20 10:36:23] [24188] Connected127.0.0.1
+[2105/10/20 10:41:31] [24664] =====Server Start=====
+[2105/10/20 10:41:31] [24664] Succ: Server socket create.
+[2105/10/20 10:41:31] [24664] Succ: Set socket option.
+[2105/10/20 10:41:31] [24664] Waiting connect...
+[2105/10/20 10:41:42] [24664] Connected127.0.0.1
+[2105/10/20 10:42:00] [24664] from:[127.0.0.1] msg:[ls]
+[2105/10/20 10:42:09] [24664] Connected127.0.0.1
+[2105/10/20 10:42:29] [24664] from:[127.0.0.1] msg:[ls]
+[2105/10/20 10:43:44] [25011] =====Server Start=====
+[2105/10/20 10:43:44] [25011] Succ: Server socket create.
+[2105/10/20 10:43:44] [25011] Succ: Set socket option.
+[2105/10/20 10:43:44] [25011] Waiting connect...
+[2105/10/20 10:43:46] [25011] Connected127.0.0.1
+[2105/10/20 10:43:46] [25011] from:[127.0.0.1] msg:[ls]
+[2105/10/20 10:45:52] [25198] =====Server Start=====
+[2105/10/20 10:45:53] [25198] Succ: Server socket create.
+[2105/10/20 10:45:53] [25198] Succ: Set socket option.
+[2105/10/20 10:45:53] [25198] Waiting connect...
+[2105/10/20 10:45:57] [25198] Connected127.0.0.1
+[2105/10/20 10:45:58] [25198] from:[127.0.0.1] msg:[ls]
+[2105/10/20 10:46:08] [25198] from:[127.0.0.1] msg:[llsdfafadf]
+[2105/10/20 10:46:32] [25320] =====Server Start=====
+[2105/10/20 10:46:32] [25320] Succ: Server socket create.
+[2105/10/20 10:46:32] [25320] Succ: Set socket option.
+[2105/10/20 10:46:32] [25320] Waiting connect...
+[2105/10/20 10:46:35] [25320] Connected: 127.0.0.1
+[2105/10/20 10:46:36] [25320] from:[127.0.0.1] msg:[ls]
+[2105/10/20 10:50:07] [25480] =====Server Start=====
+[2105/10/20 10:50:07] [25480] Succ: Server socket create.
+[2105/10/20 10:50:07] [25480] Succ: Set socket option.
+[2105/10/20 10:50:07] [25480] Waiting connect...
+[2105/10/20 10:50:10] [25480] [Stdin]exit
+[2105/10/20 10:50:10] [25480] =====Server End=====
+[2105/10/20 10:50:50] [25685] =====Server Start=====
+[2105/10/20 10:50:50] [25685] Succ: Server socket create.
+[2105/10/20 10:50:50] [25685] Succ: Set socket option.
+[2105/10/20 10:50:50] [25685] Waiting connect...
+[2105/10/20 10:51:00] [25685] [Stdin]exit
+[2105/10/20 10:51:00] [25685] =====Server End=====
+[2105/10/20 10:51:09] [25777] =====Server Start=====
+[2105/10/20 10:51:10] [25777] Succ: Server socket create.
+[2105/10/20 10:51:10] [25777] Succ: Set socket option.
+[2105/10/20 10:51:10] [25777] Waiting connect...
+[2105/10/20 10:51:11] [25777] [Stdin]ls
+[2105/10/20 10:51:13] [25777] [Stdin]exit
+[2105/10/20 10:51:13] [25777] =====Server End=====
+[2105/10/20 10:53:15] [26059] =====Server Start=====
+[2105/10/20 10:53:15] [26059] Succ: Server socket create.
+[2105/10/20 10:53:15] [26059] Succ: Set socket option.
+[2105/10/20 10:53:15] [26059] Waiting connect...
+[2105/10/20 10:53:20] [26059] [Stdin]exit
+[2105/10/20 10:53:20] [26059] =====Server End=====
+[2105/10/20 10:54:05] [26325] =====Server Start=====
+[2105/10/20 10:54:05] [26325] Succ: Server socket create.
+[2105/10/20 10:54:05] [26325] Succ: Set socket option.
+[2105/10/20 10:54:05] [26325] Waiting connect...
+[2105/10/20 10:54:07] [26325] [Stdin]exit
+[2105/10/20 10:54:07] [26325] =====Server End=====
+[2105/10/20 11:01:01] [26624] =====Server Start=====
+[2105/10/20 11:01:01] [26624] Succ: Server socket create.
+[2105/10/20 11:01:01] [26624] Succ: Set socket option.
+[2105/10/20 11:01:01] [26624] Waiting connect...
+[2105/10/20 11:01:09] [26624] Connected: 127.0.0.1
+[2105/10/20 11:01:12] [26624] from:[127.0.0.1] msg:[hello world
+]
+[2105/10/20 11:33:02] [26624] [Stdin]exit
+[2105/10/20 11:33:02] [26624] =====Server End=====
+[2105/10/20 11:33:06] [27057] =====Server Start=====
+[2105/10/20 11:33:06] [27057] Succ: Server socket create.
+[2105/10/20 11:33:06] [27057] Succ: Set socket option.
+[2105/10/20 11:33:06] [27057] Waiting connect...
+[2105/10/20 11:33:10] [27057] Connected: 127.0.0.1
+[2105/10/20 11:33:11] [27057] from:[127.0.0.1] msg:[ls
+]
+[2105/10/20 11:34:21] [27272] =====Server Start=====
+[2105/10/20 11:34:21] [27272] Succ: Server socket create.
+[2105/10/20 11:34:21] [27272] Succ: Set socket option.
+[2105/10/20 11:34:21] [27272] Waiting connect...
+[2105/10/20 11:34:23] [27272] Connected: 127.0.0.1
+[2105/10/20 11:34:24] [27272] from:[127.0.0.1] msg:[hello
+]
+[2105/10/20 11:35:32] [27272] Closed 127.0.0.1
+[2105/10/20 11:35:57] [27535] =====Server Start=====
+[2105/10/20 11:35:57] [27535] Succ: Server socket create.
+[2105/10/20 11:35:57] [27535] Succ: Set socket option.
+[2105/10/20 11:35:57] [27535] Waiting connect...
+[2105/10/20 11:37:05] [27755] =====Server Start=====
+[2105/10/20 11:37:05] [27755] Succ: Server socket create.
+[2105/10/20 11:37:05] [27755] Succ: Set socket option.
+[2105/10/20 11:37:05] [27755] Waiting connect...
+[2105/10/20 11:37:22] [27787] =====Server Start=====
+[2105/10/20 11:37:22] [27787] Succ: Server socket create.
+[2105/10/20 11:37:22] [27787] Succ: Set socket option.
+[2105/10/20 11:37:22] [27787] Waiting connect...
+[2105/10/20 11:39:36] [28009] =====Server Start=====
+[2105/10/20 11:39:36] [28009] Succ: Server socket create.
+[2105/10/20 11:39:36] [28009] Succ: Set socket option.
+[2105/10/20 11:39:36] [28009] Waiting connect...
+[2105/10/20 11:40:24] [28107] =====Server Start=====
+[2105/10/20 11:40:24] [28107] Succ: Server socket create.
+[2105/10/20 11:40:24] [28107] Succ: Set socket option.
+[2105/10/20 11:40:24] [28107] Waiting connect...
+[2105/10/20 11:40:30] [28107] have connection
+[2105/10/20 11:40:30] [28139] dup socket
+[2105/10/20 11:41:37] [28320] =====Server Start=====
+[2105/10/20 11:41:37] [28320] Succ: Server socket create.
+[2105/10/20 11:41:37] [28320] Succ: Set socket option.
+[2105/10/20 11:41:37] [28320] Waiting connect...
+[2105/10/20 11:41:38] [28320] have connection
+[2105/10/20 11:41:38] [28322] dup socket
+[2105/10/20 11:41:45] [28322] ls
+[2105/10/20 11:42:30] [28322] End
+[2105/10/20 11:42:31] [28320] have connection
+[2105/10/20 11:42:31] [28365] dup socket
+[2105/10/20 11:42:34] [28365] End
+[2105/10/20 11:42:46] [28477] =====Server Start=====
+[2105/10/20 11:42:46] [28477] Succ: Server socket create.
+[2105/10/20 11:42:46] [28477] Succ: Set socket option.
+[2105/10/20 11:42:46] [28477] Waiting connect...
+[2105/10/20 11:42:48] [28477] have connection
+[2105/10/20 11:42:48] [28479] dup socket
+[2105/10/20 11:42:53] [28479] ls
+[2105/10/20 11:42:55] [28479] End

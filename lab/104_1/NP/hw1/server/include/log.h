@@ -7,6 +7,7 @@
 #include <ctime>
 #include <sys/types.h>
 #include <unistd.h>
+#include "config.h"
 
 
 class LOG{

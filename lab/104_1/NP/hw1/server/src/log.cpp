@@ -13,6 +13,7 @@ LOG::LOG(std::string _file_path, std::string _service_name){
 }
 
 void LOG::write(std::string msg){
+#if __LOG == 1
     time_t rawtime;
     time(&rawtime);
     struct tm *timeinfo = localtime(&rawtime);
@@ -35,4 +36,5 @@ void LOG::write(std::string msg){
     /* msg */
     ofs << msg << std::endl;
     ofs.close();
+#endif
 }
