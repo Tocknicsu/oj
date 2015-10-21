@@ -90,7 +90,7 @@ int main(){
     vec.push_back("al");
     vec.push_back("ga");
     vec.push_back("in");
-    vec.push_back("ti");
+    vec.push_back("tl");
 
     vec.push_back("c");
     vec.push_back("si");
