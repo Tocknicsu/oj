@@ -9,6 +9,7 @@ void Solve(){
     scanf("%d%d", &n, &m);
     int x, y;
     for(int i = 0 ; i < n ; i++){
+        deg[i] = 0;
         ed[i].clear();
         scanf("%d", &v[i]);
         v[i]--;
