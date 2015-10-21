@@ -43,6 +43,8 @@ void Solve(){
     }
     ans = min(ans, tmp);
     flag = 1;
+    tmp = 0;
+    now = n;
     for(int i = 0 ; i < n ; i++){
         local_deg[i] = deg[i];
         if(local_deg[i] == 0)
