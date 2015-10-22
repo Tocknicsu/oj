@@ -6,10 +6,10 @@ BIN_DIR = ./bin
 TEST_DIR = ./test
 TMP_DIR = ./tmp
 
-OBJS := function config log server
+OBJS := function config log server sh
 
 all:
-	make clean
+	#make clean
 	make server
 	cp ./bin/server ./server
 
@@ -25,4 +25,4 @@ $(foreach x,$(OBJS),$(TMP_DIR)/$x.o): $(TMP_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 
 clean:
-	rm $(TMP_DIR)/*.o
+	-rm $(TMP_DIR)/*.o
