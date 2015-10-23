@@ -11,6 +11,7 @@
 #include <string>
 #include <cstring>
 #include <sys/wait.h>
+#include <fcntl.h>
 class SH{
     struct PIPE{
         int pip[2];
@@ -24,6 +25,7 @@ class SH{
         void external(std::vector<std::string>);
         int internal(std::string);
         std::string get_cwd();
+        void create_map_pipe(int);
     public:
         SH();
         int exec(std::string);
