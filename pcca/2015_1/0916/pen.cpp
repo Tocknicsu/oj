@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define MAX 8
-#define SMAX 16
+#define MAX 131072
+#define SMAX 262144
 typedef long long ll;
 
 struct S{
