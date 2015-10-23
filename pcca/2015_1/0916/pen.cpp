@@ -21,7 +21,7 @@ namespace Seg{
     Node v[SMAX * 2];
     
     void init(){
-        for(int i = 2 * SMAX ; i > SMAX ; i--){
+        for(int i = 2 * SMAX - 1 ; i >= SMAX ; i--){
             v[i].v = v[i].maxv = 0;
             v[i].sz = 0;
         }
