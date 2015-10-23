@@ -80,7 +80,7 @@ void Solve(){
                     maxsz = 0;
                 }
                 if(maxv == Seg::v[1].maxv)
-                    maxsz += Seg::v[1].sz * (s[i].x - s[i-1].x);
+                    maxsz += ll(Seg::v[1].sz) * ll(s[i].x - s[i-1].x);
             }
         }
         sy = lower_bound(y.begin(), y.end(), s[i].sy) - y.begin();
