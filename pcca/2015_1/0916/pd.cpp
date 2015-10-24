@@ -1,61 +1,115 @@
-/*
-給定二維最標點
-求曼哈頓距離的MST
-*/
 #include <bits/stdc++.h>
 using namespace std;
 #define f first
 #define s second
-#define MAX 1024
 typedef pair<int, int> PII;
-PII m[MAX][MAX];
-namespace DS{
-    int v[MAX*MAX];
+#define MAX 131072
+#define INF 1029384756
+struct Point{
+    int x, y, id;
+    Point(){}
+    Point(int _x, int _y, int _id) : x(_x), y(_y), id(_id){}
+    bool operator<(const Point &b) const {
+        return x < b.x;
+    }
+};
+vector<Point> p;
+struct ED{
+    int a, b, c;
+    ED(){}
+    ED(int _a, int _b, int _c) : a(_a), b(_b), c(_c){}
+    bool operator<(const ED &B) const {
+        return c < B.c;
+    }
+};
+namespace BIT{
+    int v[MAX+1], id[MAX+1];
     void init(){
-        for(int i = 0 ; i < MAX * MAX ; i++)
+        for(int i = 0 ; i < MAX ; i++)
+            v[i] = INF;
+    }
+    void add(int x, int now){
+        for( ; x > 0 ; x -= x & -x)
+            if(v[x] > p[now].x + p[now].y){
+                v[x] = p[now].x + p[now].y;
+                id[x] = now;
+            }
+    }
+    int query(int x){
+        int re = INF, reid = -1;
+        for( ; x < MAX ; x += x & -x){
+            if(v[x] < re){
+                re = v[x], reid = id[x];
+            }
+        }
+        return reid;
+    }
+};
+namespace DS{
+    int v[MAX];
+    void init(){
+        for(int i = 0 ; i < MAX ; i++)
             v[i] = i;
     }
     int find(int x){
-        return x == v[x] ? x : v[x] = find(v[x]);
+        return x == v[x] ? v[x] : v[x] = find(v[x]);
     }
-    void merge(int x, int y){
-        v[find(x)] = find(y);
+    bool merge(int x, int y){
+        x = find(x), y = find(y);
+        if(x == y) return false;
+        v[x] = y;
+        return true;
     }
 };
-int d[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+int __distance(int x, int y){
+    return abs(p[x].x - p[y].x) + abs(p[x].y - p[y].y);
+}
 int main(){
-    DS::init();
-    memset(m, -1, sizeof(m));
     int n;
     scanf("%d", &n);
-    queue<PII> Q;
+    p = vector<Point>(n);
+    vector<PII> ord(n);
+    vector<int> dis;
+    vector<ED> ed;
     for(int i = 0 ; i < n ; i++){
-        int x, y;
-        scanf("%d%d", &x, &y);
-        if(m[x][y].s != -1) continue;
-        m[x][y] = PII(0, i);
-        Q.push(PII(x,y));
+        scanf("%d%d", &p[i].x, &p[i].y);
+        p[i].id = i;
     }
-    long long ans = 0;
-    while(Q.size()){
-        int x = Q.front().f;
-        int y = Q.front().s;
-        Q.pop();
-        for(int i = 0 ; i < 4 ; i++){
-            int nx = x + d[i][0];
-            int ny = y + d[i][1];
-            if(nx < 0 || ny < 0 || nx >= MAX || ny >= MAX) continue;
-            if(m[nx][ny].f != -1){
-                if(DS::find(m[nx][ny].s) != DS::find(m[x][y].s)){
-                    DS::merge(m[nx][ny].s, m[x][y].s);
-                    ans += m[nx][ny].f + m[x][y].f + 1;
-                }
+    for(int k = 0 ; k < 4 ; k++){
+        BIT::init();
+        dis.clear();
+        if(k == 2 || k == 4)
+            for(int i = 0 ; i < n ; i++)
+                swap(p[i].x, p[i].y);
+        if(k == 3)
+            for(int i = 0 ; i < n ; i++)
+                p[i].x = -p[i].x;
+        sort(p.begin(), p.end());
+        for(int i = 0 ; i < n ; i++){
+            ord[i].f = p[i].x - p[i].y, ord[i].s = i;
+            dis.push_back(ord[i].f);
+        }
+        sort(ord.begin(), ord.end());
+        sort(dis.begin(), dis.end());
+        dis.resize(unique(dis.begin(), dis.end())-dis.begin());
+        for(int i = n-1 ; i >= 0 ; i--){
+            int x = lower_bound(dis.begin(), dis.end(), ord[i].f) - dis.begin() + 1;
+            int y = BIT::query(x);
+            if(y != -1){
+                //ed.push_back(ED(1, 2, 3));
+                ed.push_back( ED( p[ord[i].s].id, p[y].id, __distance(ord[i].s, y) )) ;
             } else {
-                m[nx][ny] = PII(m[x][y].f+1, m[x][y].s);
-                Q.push(PII(nx, ny));
             }
+            BIT::add(x, ord[i].s);
         }
     }
-    cout << ans;
+    DS::init();
+    sort(ed.begin(), ed.end());
+    int ans = 0;
+    for(int i = 0 ; i < (int)ed.size() ; i++){
+        if(DS::merge(ed[i].a, ed[i].b))
+            ans += ed[i].c;
+    }
+    printf("%d\n", ans);
     return 0;
 }
