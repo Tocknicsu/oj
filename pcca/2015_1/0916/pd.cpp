@@ -105,11 +105,11 @@ int main(){
     }
     DS::init();
     sort(ed.begin(), ed.end());
-    int ans = 0;
+    long long ans = 0;
     for(int i = 0 ; i < (int)ed.size() ; i++){
         if(DS::merge(ed[i].a, ed[i].b))
             ans += ed[i].c;
     }
-    printf("%d\n", ans);
+    printf("%lld\n", ans);
     return 0;
 }
