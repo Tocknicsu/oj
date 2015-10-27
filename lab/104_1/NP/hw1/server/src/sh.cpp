@@ -4,7 +4,9 @@ SH::SH(){
 }
 void SH::init(){
     chdir("./ras");
-    std::cout << setenv("PATH", "bin:.", 1) << std::endl;
+    setenv("PATH", "bin:.", 1);
+    m_count = 0;
+    //std::cout << setenv("PATH", "bin:.", 1) << std::endl;
 }
 bool can_exec(std::string file){
     std::string path = getenv("PATH");
@@ -74,6 +76,7 @@ void SH::create_map_pipe(int num){
     if(pipemap.find(num) == pipemap.end()){
         pipemap[num] = PIPE();
         pipe(pipemap[num].pip);
+        //std::cout << pipemap[num].pip[0] << ' ' << pipemap[num].pip[1] << std::endl;
     }
 }
 int SH::exec(std::string cmd){
@@ -86,13 +89,16 @@ int SH::exec(std::string cmd){
         else
             cmds.push_back("");
     }
-    if(internal(cmds[0]))
+    if(internal(cmds[0])){
+        m_count++;
         return 0;
+    }
     std::vector<std::vector<std::string> > parse_cmd;
     for(int i = 0 ; i < (int)cmds.size() ; i++){
         parse_cmd.push_back(parse_single_cmd(cmds[i]));
         if(!can_exec(parse_cmd[i][0])){
             std::cout << "Unknown command: [" << parse_cmd[i][0] << "]." << std::endl;
+            parse_cmd.pop_back();
             break;
         }
     }
@@ -100,22 +106,14 @@ int SH::exec(std::string cmd){
     int first_pid = 0;
     int pip_num = cmds.size() - 1;
     int pip[pip_num][2];
-    for(int i = 0 ; i < pip_num ; i++)
-        pipe(pip[i]);
+    /* to do better */
 
 
     int last_stderr = -1;
     int last_stdout = -1;
 
-
-
     for(int i = 0 ; i < (int)parse_cmd.size() ; i++){
-        if(i == 0){
-            m_count++;
-            if(pipemap.find(m_count) != pipemap.end())
-                close(pipemap[m_count].pip[1]);
-        }
-        if(i == cmds.size() - 1){
+        if(i == cmds.size() - 1){   //last command pipe
             for(int k = 0 ; k < 2 ; k++){
                 if(parse_cmd[i].size() > 1 && parse_cmd[i].back()[0] == '|'){
                     last_stdout = atoi(parse_cmd[i].back().substr(1, parse_cmd[i].back().size()-1).c_str());
@@ -125,54 +123,62 @@ int SH::exec(std::string cmd){
                     last_stderr = atoi(parse_cmd[i].back().substr(1, parse_cmd[i].back().size()-1).c_str());
                     parse_cmd[i].pop_back();
                 }
-            }
-            std::cout << last_stderr << ' ' << last_stdout << std::endl;
-            if(last_stderr != -1){
+            } if(last_stderr != -1){
                 create_map_pipe(m_count+last_stderr);
             }
             if(last_stdout != -1){
                 create_map_pipe(m_count+last_stdout);
             }
+        } else {
+            pipe(pip[i]);
         }
+        if(pipemap.find(m_count) == pipemap.end())
+            create_map_pipe(m_count);
         int pid = fork();
-        /*
-        if(i == 0){
-            m_count++;
-            if(pipemap.find(m_count) != pipemap.end()){
-                close(pipemap[m_count].pip[1]);
-            }
-        }
-        */
         if(pid){
             setpgid(pid, first_pid);
             if(!first_pid)
                 first_pid = pid;
+            if(i)
+                close(pip[i-1][0]), close(pip[i-1][1]);
         } else {
             if(i == cmds.size() - 1){
                 if(parse_cmd[i].size() > 2 && parse_cmd[i][parse_cmd[i].size()-2] == ">"){
-                    std::cout << "dup to: " << parse_cmd[i].back() << std::endl;
                     freopen(parse_cmd[i].back().c_str(), "w", stdout);
                     parse_cmd[i].pop_back();
                     parse_cmd[i].pop_back();
                 }
-            }
-            if(i != pip_num)
+                if(last_stdout != -1){
+                    dup2(pipemap[m_count+last_stdout].pip[1], 1);
+                }
+                if(last_stderr != -1){
+                    dup2(pipemap[m_count+last_stderr].pip[1], 2);
+                }
+            } else {
                 dup2(pip[i][1], 1);
-            if(i != 0)
+                close(pip[i][0]), close(pip[i][1]);
+            }
+            /* in */
+            if(i == 0){
+                dup2(pipemap[m_count].pip[0], 0);
+            } else {
                 dup2(pip[i-1][0], 0);
+                close(pip[i-1][0]), close(pip[i-1][1]);
+            }
 
-            for(int j = 0 ; j < pip_num ; j++)
-                close(pip[j][0]), close(pip[j][1]);
+            for(auto x : pipemap){
+                close(x.second.pip[0]);
+                close(x.second.pip[1]);
+            }
             external(parse_cmd[i]);
         }
     }
     if(pipemap.find(m_count) != pipemap.end()){
+        close(pipemap[m_count].pip[1]);
         close(pipemap[m_count].pip[0]);
-        pipemap.erase(pipemap.find(m_count));
     }
-    for(int i = 0 ; i < pip_num ; i++)
-        close(pip[i][0]), close(pip[i][1]);
     int num = parse_cmd.size();
+    if(num) m_count++;
     int status;
     for(int i = 0 ; i < num ; i++)
         waitpid(-first_pid, &status, 0);

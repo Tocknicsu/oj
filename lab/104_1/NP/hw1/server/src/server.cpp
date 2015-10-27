@@ -21,6 +21,10 @@ void SERVER::start(){
         m_log.write("Error: occur at set socket opt.");
         return;
     }
+    if( setsockopt(m_server_socket, SOL_SOCKET, SO_REUSEPORT, (char *)&m_opt, sizeof(m_opt)) < 0){
+        m_log.write("Error: occur at set socket opt.");
+        return;
+    }
     m_log.write("Succ: Set socket option.");
 	int port = m_config.port();
 	int max_wait_listen = m_config.max_wait_listen();

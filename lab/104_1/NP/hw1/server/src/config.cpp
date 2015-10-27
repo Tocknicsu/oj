@@ -5,7 +5,7 @@ CONFIG::CONFIG(){
     std::ifstream ifs;
 	ifs.open( config_file_path.c_str() );
     
-	if(!(ifs >> m_port)) m_port = 1736;
+	if(!(ifs >> m_port)) m_port = 1737;
 	if(!(ifs >> m_max_wait_listen)) m_max_wait_listen = 4;
 	ifs.close();
 }
