@@ -5,25 +5,23 @@ SERVER::SERVER(){
 SERVER::~SERVER(){
     m_log.write("=====Server End=====");
 }
-void SERVER::start(){
-    server_stdout = dup(STDOUT_FILENO);
-    server_stderr = dup(STDERR_FILENO);
+void SERVER::init(){
     m_log = LOG("server.log", "server");
     m_config = CONFIG();
     m_log.write("=====Server Start=====");
 	if( (m_server_socket = socket(AF_INET, SOCK_STREAM, 0)) == 0){
         m_log.write("Error: create server socket.");
-	    return;
+        exit(1);
 	}
     m_log.write("Succ: Server socket create.");
     int m_opt = 1;  //re use addr
     if( setsockopt(m_server_socket, SOL_SOCKET, SO_REUSEADDR, (char *)&m_opt, sizeof(m_opt)) < 0){
         m_log.write("Error: occur at set socket opt.");
-        return;
+        exit(1);
     }
     if( setsockopt(m_server_socket, SOL_SOCKET, SO_REUSEPORT, (char *)&m_opt, sizeof(m_opt)) < 0){
         m_log.write("Error: occur at set socket opt.");
-        return;
+        exit(1);
     }
     m_log.write("Succ: Set socket option.");
 	int port = m_config.port();
@@ -33,23 +31,25 @@ void SERVER::start(){
 	m_server.sin_port = htons( port );
 	if( bind(m_server_socket, (sockaddr *)&m_server, sizeof(m_server)) < 0){
         m_log.write("Error: occur bind.");
-		return;
+        exit(1);
 	}
 
 	if( listen(m_server_socket, max_wait_listen) < 0){
         m_log.write("Error: occur listen.");
-		return;
+        exit(1);
 	}
 
 	m_server_len = sizeof(m_server);
     m_log.write("Waiting connect...");
 
 	struct timeval timeout={0, 0};
-
-
+}
+void SERVER::start(){
     while(1){
         int socket_fd = accept(m_server_socket, (sockaddr*)&m_server, (socklen_t*)&m_server_len);
-        if(fork()){
+        int pid = fork();
+        if(pid){
+            clients.insert(pid);
             close(socket_fd);
         } else {
             dup2(socket_fd, STDOUT_FILENO);

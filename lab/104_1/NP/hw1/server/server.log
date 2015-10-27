@@ -539,3 +539,7 @@
 [2105/10/27 22:30:37] [8656] Succ: Server socket create.
 [2105/10/27 22:30:37] [8656] Succ: Set socket option.
 [2105/10/27 22:30:37] [8656] Waiting connect...
+[2105/10/27 23:20:43] [20454] =====Server Start=====
+[2105/10/27 23:20:43] [20454] Succ: Server socket create.
+[2105/10/27 23:20:43] [20454] Succ: Set socket option.
+[2105/10/27 23:20:43] [20454] Waiting connect...

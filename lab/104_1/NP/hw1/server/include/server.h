@@ -8,10 +8,12 @@
 #include <iostream>
 #include <list>
 #include <cstring>
+#include <set>
 #include "log.h"
 #include "config.h"
 #include "function.h"
 #include "sh.h"
+static std::set<int> clients;
 class SERVER{
     private:
 		sockaddr_in m_server;
