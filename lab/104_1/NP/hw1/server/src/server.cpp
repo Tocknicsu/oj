@@ -58,6 +58,7 @@ void SERVER::start(){
             std::string str;
             SH sh;
             sh.init();
+            sh.welcome();
             while(sh.prompt(), getline(std::cin, str)){
                 if(sh.exec(str)==-1)
                     exit(0);

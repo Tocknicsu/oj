@@ -31,5 +31,6 @@ class SH{
         int exec(std::string);
         void prompt();
         void init();
+        void welcome();
 };
 #endif

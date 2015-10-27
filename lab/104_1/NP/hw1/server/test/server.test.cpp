@@ -11,6 +11,7 @@ void signal_handler_SIGCHLD(int sig){
 int main(){
     signal(SIGCHLD, &signal_handler_SIGCHLD); 
     SERVER server;
+    server.init();
     server.start();
     for(auto x : clients){
         kill(x, SIGINT);

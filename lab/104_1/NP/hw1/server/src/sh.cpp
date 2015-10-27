@@ -67,7 +67,7 @@ int SH::internal(std::string cmd){
         setenv(parse_cmd[1].c_str(),parse_cmd[2].c_str(),1);
         return true;
     } else if(parse_cmd[0] == std::string("printenv")){
-        std::cout << getenv(parse_cmd[1].c_str()) << std::endl;
+        std::cout << parse_cmd[1].c_str() << "=" << getenv(parse_cmd[1].c_str()) << std::endl;
         return true;
     }
     return false;
@@ -173,16 +173,21 @@ int SH::exec(std::string cmd){
             external(parse_cmd[i]);
         }
     }
-    if(pipemap.find(m_count) != pipemap.end()){
+    int num = parse_cmd.size();
+    if(num && pipemap.find(m_count) != pipemap.end()){
         close(pipemap[m_count].pip[1]);
         close(pipemap[m_count].pip[0]);
     }
-    int num = parse_cmd.size();
     if(num) m_count++;
     int status;
     for(int i = 0 ; i < num ; i++)
         waitpid(-first_pid, &status, 0);
     return 0;
+}
+void SH::welcome(){
+    std::cout << "****************************************" << std::endl;
+    std::cout << "** Welcome to the information server. **" << std::endl;
+    std::cout << "****************************************" << std::endl;
 }
 void SH::prompt(){
     std::cout << "% " << std::flush;

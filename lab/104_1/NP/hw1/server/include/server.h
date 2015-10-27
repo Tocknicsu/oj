@@ -31,6 +31,7 @@ class SERVER{
     public:
         SERVER();
         ~SERVER();
+        void init();
         void start();
         void stop();
 };
