@@ -167,7 +167,7 @@ void do_command(string str){
         background = true;
     }
     if(p_cmd.size() == 0) return;
-    if(p_cmd.size() > 1 || (!internal(p_cmd[0]))){
+    if(p_cmd.size() > 1 || (!internal(p_cmd[0]))){  //no cmd or cmd size = 1
         int first_pid = 0;
         int pip_num = p_cmd.size() - 1;
         int pip[pip_num][2];
