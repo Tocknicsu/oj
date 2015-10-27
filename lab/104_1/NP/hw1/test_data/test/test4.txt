@@ -1,4 +1,4 @@
-removetag0 test.html |999
+removetag0 test.html !999
 noop
 noop
 noop

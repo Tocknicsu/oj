@@ -1,0 +1,107 @@
+****************************************
+** Welcome to the information server. **
+****************************************
+% printenv PATH
+PATH=bin:.
+% setenv PATH bin
+% printenv PATH
+PATH=bin
+% ls
+bin
+test.html
+% ls bin
+cat
+ls
+noop
+number
+removetag
+removetag0
+% cat test.html > test1.txt
+% cat test1.txt
+<!test.html>
+<TITLE>Test<TITLE>
+<BODY>This is a <b>test</b> program
+for ras.
+</BODY>
+% removetag test.html > test2.txt
+% cat test2.txt
+
+Test
+This is a test program
+for ras.
+
+% removetag0 test.html > test2.txt
+Error: illegal tag "!test.html"
+% cat test2.txt
+
+Test
+This is a test program
+for ras.
+
+% removetag test.html |1
+% number > test3.txt
+% cat test3.txt
+   1 
+   2 Test
+   3 This is a test program
+   4 for ras.
+   5 
+% removetag test.html |3
+% removetag test.html |1
+% number |1
+% number
+   1 
+   2 Test
+   3 This is a test program
+   4 for ras.
+   5 
+   6    1 
+   7    2 Test
+   8    3 This is a test program
+   9    4 for ras.
+  10    5 
+% ls |3
+% unknown_command
+Unknown command: [unknown_command].
+% removetag0 test.html !2
+
+Test
+This is a test program
+for ras.
+
+% unknown_COMMAND
+Unknown command: [unknown_COMMAND].
+% ls |1
+% UNKNOWN_COMMAND
+Unknown command: [UNKNOWN_COMMAND].
+% UNKNOWN_command
+Unknown command: [UNKNOWN_command].
+% cat | cat
+bin
+test.html
+test1.txt
+test2.txt
+test3.txt
+Error: illegal tag "!test.html"
+bin
+test.html
+test1.txt
+test2.txt
+test3.txt
+% ls |1
+% cat | ctt
+Unknown command: [ctt].
+% ls |1
+% ctt | cat
+Unknown command: [ctt].
+% ctt
+Unknown command: [ctt].
+% ctt
+Unknown command: [ctt].
+% cat
+bin
+test.html
+test1.txt
+test2.txt
+test3.txt
+% exit

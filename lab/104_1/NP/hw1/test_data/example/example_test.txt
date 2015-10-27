@@ -1,0 +1,34 @@
+printenv PATH
+setenv PATH bin
+printenv PATH
+ls
+ls bin
+cat test.html > test1.txt
+cat test1.txt
+removetag test.html > test2.txt
+cat test2.txt
+removetag0 test.html > test2.txt
+cat test2.txt
+removetag test.html |1
+number > test3.txt
+cat test3.txt
+removetag test.html |3
+removetag test.html |1
+number |1
+number
+ls |3
+unknown_command
+removetag0 test.html !2
+unknown_COMMAND
+ls |1
+UNKNOWN_COMMAND
+UNKNOWN_command
+cat | cat
+ls |1
+cat | ctt
+ls |1
+ctt | cat
+ctt
+ctt
+cat
+exit
