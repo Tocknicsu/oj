@@ -1,18 +1,8 @@
-#include <string>
+#include <bits/stdc++.h>
 #include <termios.h>
-#include <vector>
-#include <iostream>
 #include <unistd.h>
-#include <csignal>
 #include <sys/wait.h>
-#include <cstdlib>
-#include <cstring>
-#include <sstream>
-#include <map>
-#include <set>
-#include <list>
 #include <errno.h>
-#include <ctime>
 using namespace std;
 
 map<int, int> process;
@@ -40,15 +30,11 @@ string set_color(string front_color, string backend_color="", string str="", boo
     color["azure"]  = 36;
     color["white"]  = 37;
     stringstream ss;
-    if(front_color.size())
-        ss << "\033[" << color[front_color] << "m";
-    if(backend_color.size())
-        ss << "\033[" << color[backend_color] << "m";
-    if(hight_light)
-        ss << "\033[1m";
+    if(front_color.size()) ss << "\033[" << color[front_color] << "m";
+    if(backend_color.size()) ss << "\033[" << color[backend_color] << "m";
+    if(hight_light) ss << "\033[1m";
     ss << str;
-    if(reset)
-        ss << "\033[0m";
+    if(reset) ss << "\033[0m";
     getline(ss, str);
     return str;
 }
@@ -59,7 +45,6 @@ void prompt(){
     time (&rawtime);
     timeinfo = localtime (&rawtime);
     strftime (time_buffer,80,"%Y-%m-%d %H-%M-%S",timeinfo);
-
     cout 
         << "┌─[" << set_color("azure", "", get_username(), 1, 1) << "]" << 
         " - [" << set_color("yellow", "", get_cwd(), 1, 1) << "]" << 
@@ -67,38 +52,25 @@ void prompt(){
         << "├─[" << last_status << "] "
         << set_color("red", "", "➤  ", 1) << flush;
 }
-vector<string> parse_multi_cmd(string str){
+vector<string> parse_multi_cmd(string source){
+    char str[source.size()+1];
+    strcpy(str, source.c_str());
     vector<string> cmd;
-    cmd.push_back("");
-    for(int i = 0 ; i < (int)str.size() ; i++){
-        if (str[i] == '|') {
-            cmd.push_back("");
-        } else if(str[i] == '&') {
-            cmd.push_back("&");
-        } else {
-            cmd.back().push_back(str[i]);
-        }
+    char *ptr = strtok(str, "|");
+    while(ptr){
+        cmd.push_back(ptr);
+        ptr = strtok(NULL, "|");
     }
-    while(cmd.size() && !cmd.back().size())
-        cmd.pop_back();
-    for(int i = 0 ; i < (int)cmd.size() ; i++)
-        while(cmd[i].size() && cmd[i].back() == ' ')
-            cmd[i].pop_back();
+    if(cmd.size() && cmd.back().size() && cmd.back().back() == ' ') cmd.back().pop_back();
+    if(cmd.size() && cmd.back().size() && cmd.back().back() == '&') cmd.push_back("&");
     return cmd;
 }
 vector<string> parse_single_cmd(string str){
     vector<string> cmd;
-    cmd.push_back("");
-    for(int i = 0 ; i < (int)str.size() ; i++){
-        if(str[i] == ' '){
-            if(cmd.back().size())
-                cmd.push_back("");
-        } else {
-            cmd.back().push_back(str[i]);
-        }
-    }
-    while(cmd.size() && !cmd.back().size())
-        cmd.pop_back();
+    stringstream ss(str);
+    string tmp;
+    while(ss >> tmp)
+        cmd.push_back(tmp);
     return cmd;
 }
 void signal_handler_SIGINT(int sig){
@@ -184,7 +156,6 @@ int external(string str){
     delete [] args;
     exit(1);
 }
-
 bool my_getline(string &str){
     return getline(cin, str);
 }
@@ -200,9 +171,9 @@ void do_command(string str){
         int first_pid = 0;
         int pip_num = p_cmd.size() - 1;
         int pip[pip_num][2];
-        for(int i = 0 ; i < pip_num ; i++)
-            pipe(pip[i]);
         for(int i = 0 ; i < (int)p_cmd.size() ; i++){
+            if(i != pip_num - 1)
+                pipe(pip[i]);
             int pid = fork();
             if(pid){
                 all_process.insert(pid);
@@ -223,17 +194,10 @@ void do_command(string str){
                     close(pip[i-1][0]);
                     close(pip[i-1][1]);
                 }
-                /*
-                for(int j = 0 ; j < pip_num ; j++)
-                    close(pip[j][0]), close(pip[j][1]);
-                */
                 external(p_cmd[i]);
             }
             /* for beauty */
-            if(i != (int)p_cmd.size()-1)
-                cout << "├─";
-            else
-                cout << "└─";
+            cout << (i != (int)p_cmd.size()-1 ? "├─" : "└─");
             cout << set_color("azure", "", "", 0, 1) << "[" << pid << "] - [" << getpgid(pid) << "] ";
             vector<string> cmds = parse_single_cmd(p_cmd[i]);
             for(int j = 0 ; j < (int)cmds.size() ; j++)
@@ -243,9 +207,6 @@ void do_command(string str){
         }
         tcsetpgrp(STDIN_FILENO, first_pid);
         process[first_pid] = p_cmd.size();
-        /*
-        cout << "└─" << set_color("azure", "", "", 0, 1) << "[" << first_pid << "] - [" << getpgid(first_pid) << "]"  << endl << set_color("");
-        */
         if(!background)
             WAIT(first_pid);
         tcsetpgrp(STDIN_FILENO, getpid());
