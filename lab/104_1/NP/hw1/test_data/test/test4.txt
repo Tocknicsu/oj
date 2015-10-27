@@ -1,4 +1,4 @@
-removetag0 test.html !999
+removetag0 test.html |999
 noop
 noop
 noop
@@ -988,6 +988,7 @@ noop
 noop
 noop
 n00p
+noop
 noop
 noop
 noop
