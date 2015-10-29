@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-module shift(input clk, input rst, output [7:0] sum);
+module data_template(input clk, input rst, output [7:0] sum);
 
 wire [7:0] in0, in1, in2, in3, in4, in5, in6, in7;
 reg [7:0] data0[0:31];
