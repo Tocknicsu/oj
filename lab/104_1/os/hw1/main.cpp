@@ -95,9 +95,11 @@ void WAIT(int pid){
 }
 void signal_handler_SIGCHLD(int sig){
     int status;
-    int pid = waitpid(-1, &status, WNOHANG);
-    all_process.erase(pid);
-    process[getpgid(pid)]--;
+    int pid;
+    while(pid = waitpid(-1, &status, WNOHANG), pid != -1){
+        all_process.erase(pid);
+        process[getpgid(pid)]--;
+    }
 }
 void signal_handler_SIGTSTP(int sig){
     cout << endl;
