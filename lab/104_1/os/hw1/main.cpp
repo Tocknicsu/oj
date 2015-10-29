@@ -83,9 +83,10 @@ void WAIT(int pid){
     int wait_num = process[pid];
     for(int i = 0 ; i < wait_num ; i++){
         int m_pid = waitpid(-pid, &status, WUNTRACED);
-        if(WIFEXITED(status))
+        if(WIFEXITED(status)){
             process[pid]--;
-        all_process.erase(m_pid);
+            all_process.erase(m_pid);
+        }
     }
     if(WIFSIGNALED(status) || WIFSTOPPED(status))
         cout << endl;
@@ -96,10 +97,9 @@ void WAIT(int pid){
 void signal_handler_SIGCHLD(int sig){
     int status;
     int pid;
-    while(pid = waitpid(-1, &status, WNOHANG), pid != -1){
+    pid = waitpid(-1, &status, WNOHANG);
         all_process.erase(pid);
         process[getpgid(pid)]--;
-    }
 }
 void signal_handler_SIGTSTP(int sig){
     cout << endl;
@@ -174,12 +174,13 @@ void do_command(string str){
         int pip_num = p_cmd.size() - 1;
         int pip[pip_num][2];
         for(int i = 0 ; i < (int)p_cmd.size() ; i++){
-            if(i != pip_num - 1)
+            if(i != pip_num){
                 pipe(pip[i]);
+            }
             int pid = fork();
             if(pid){
-                all_process.insert(pid);
                 setpgid(pid, first_pid);
+                all_process.insert(pid);
                 if(!first_pid){
                     first_pid = pid;
                 } else {

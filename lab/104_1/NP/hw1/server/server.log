@@ -555,3 +555,7 @@
 [2105/10/28 00:35:48] [30109] Succ: Server socket create.
 [2105/10/28 00:35:48] [30109] Succ: Set socket option.
 [2105/10/28 00:35:48] [30109] Waiting connect...
+[2105/10/29 17:16:44] [12418] =====Server Start=====
+[2105/10/29 17:16:44] [12418] Succ: Server socket create.
+[2105/10/29 17:16:44] [12418] Succ: Set socket option.
+[2105/10/29 17:16:44] [12418] Waiting connect...

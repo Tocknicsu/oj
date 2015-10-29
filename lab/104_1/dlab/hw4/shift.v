@@ -10,6 +10,7 @@ reg [7:0] data4[0:31];
 reg [7:0] data5[0:31];
 reg [7:0] data6[0:31];
 reg [7:0] data7[0:31];
+reg [31:0] tmp_sum;
 reg count;
 reg available;
 wire data_available;
@@ -23,6 +24,7 @@ assign in4 = data4[0];
 assign in5 = data5[0];
 assign in6 = data6[0];
 assign in7 = data7[0];
+assign sum = (tmp_sum + 128) / 256;
 integer i;
 
 adder_tree add (
@@ -37,7 +39,7 @@ adder_tree add (
     .in5(in5),
     .in6(in6),
     .in7(in7),
-    .sum(sum)
+    .sum(tmp_sum)
 );
 
 always @(posedge clk)
