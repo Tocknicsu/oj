@@ -157,7 +157,7 @@ int external(string str){
     exit(1);
 }
 bool my_getline(string &str){
-    return getline(cin, str);
+    return (bool)getline(cin, str);
 }
 void do_command(string str){
     vector<string> p_cmd = parse_multi_cmd(str);
