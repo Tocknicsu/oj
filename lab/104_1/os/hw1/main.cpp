@@ -62,7 +62,9 @@ vector<string> parse_multi_cmd(string source){
         ptr = strtok(NULL, "|");
     }
     if(cmd.size() && cmd.back().size() && cmd.back().back() == ' ') cmd.back().pop_back();
+    if(cmd.size() && cmd[0].empty()) cmd.pop_back();
     if(cmd.size() && cmd.back().size() && cmd.back().back() == '&') cmd.push_back("&");
+    
     return cmd;
 }
 vector<string> parse_single_cmd(string str){
