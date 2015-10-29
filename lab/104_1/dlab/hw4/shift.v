@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-module data_template(input clk, input rst, output [31:0] sum);
+module data_template(input clk, input rst, output [7:0] sum);
 
 wire [7:0] in0, in1, in2, in3, in4, in5, in6, in7;
 reg [7:0] data0[0:31];
@@ -10,8 +10,8 @@ reg [7:0] data4[0:31];
 reg [7:0] data5[0:31];
 reg [7:0] data6[0:31];
 reg [7:0] data7[0:31];
-reg [31:0] tmp_sum;
-reg count;
+wire [31:0] tmp_sum;
+integer count;
 reg available;
 wire data_available;
 
@@ -45,12 +45,11 @@ adder_tree add (
 always @(posedge clk)
     if (rst) begin
         `include "data.dat"
-        available = 0;
+        available <= 0;
         count <= 0;
     end else begin
         if( count < 32 ) begin
             available <= 1;
-            count <= count + 1;
             for(i = 0 ; i < 32 ; i = i + 1) begin
                 data0[i] <= data0[(i+1)%32];
                 data1[i] <= data1[(i+1)%32];
@@ -61,6 +60,7 @@ always @(posedge clk)
                 data6[i] <= data6[(i+1)%32];
                 data7[i] <= data7[(i+1)%32];
             end
+            count <= count + 1;
         end else begin
             available <= 0;
         end

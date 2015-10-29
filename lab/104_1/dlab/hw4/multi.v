@@ -13,7 +13,6 @@ reg [7:0] data6[0:31];
 reg [7:0] data7[0:31];
 reg [5:0] count;
 reg available;
-reg done;
 
 adder_tree add (
     .clk(clk),
@@ -34,13 +33,13 @@ always @(posedge clk)
         `include "data.dat"
         count <= 0;
         data_available <= 0;
-        done <= 0;
     end else begin
         if( count < 32 ) begin
             available <= 1;
             count <= count + 1;
         end else begin
             available <= 0;
+        end
     else;
 endmodule
 
