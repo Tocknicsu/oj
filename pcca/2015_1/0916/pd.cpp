@@ -96,7 +96,6 @@ int main(){
             int x = lower_bound(dis.begin(), dis.end(), ord[i].f) - dis.begin() + 1;
             int y = BIT::query(x);
             if(y != -1){
-                //ed.push_back(ED(1, 2, 3));
                 ed.push_back( ED( p[ord[i].s].id, p[y].id, __distance(ord[i].s, y) )) ;
             } else {
             }

@@ -1,13 +1,3 @@
-/*
-給定一場比賽勝負關係 以及有誤的排名
-保證正確的排名唯一 問至少要修改幾次才會改對
-
-解題概念：Topological sort
-做出排名後用LIS求出最長的部份
-2 * n - LIS.size() 即是答案
-
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
 #define f first

@@ -1,8 +1,3 @@
-/*
-照著題目講的做
-*/
-
-
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;

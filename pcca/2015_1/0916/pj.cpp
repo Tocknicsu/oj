@@ -1,11 +1,3 @@
-/*
-給定兩棵二元樹
-問有多少子樹的組成元素相同
-解題概念：
-做hash然後count數量
-hash部份這邊採用一般的加法 以及 相成 % 一質數
-並且每個值也事先做平移
-*/
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
