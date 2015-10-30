@@ -2,13 +2,32 @@
 #include <termios.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <errno.h>
+#include <fcntl.h>
 using namespace std;
 
 map<int, int> process;
 set<int> all_process;
 int last_status;
 
+bool can_exec(string file){
+    std::string path = getenv("PATH");
+    std::vector<std::string> dir;
+    dir.push_back("");
+    for(int i = 0 ; i < (int)path.size() ; i++){
+        if(path[i]==':') dir.push_back("");
+        else dir.back().push_back(path[i]);
+    }
+    for(int i = 0 ; i < (int)dir.size() ; i++){
+        std::string look_file = dir[i] + std::string("/") + file;
+        struct stat st;
+        if (stat(look_file.c_str(), &st) >= 0)
+            if ((st.st_mode & S_IEXEC) != 0)
+                return true;
+    }
+    return false;
+}
 string get_username(){
     char buffer[1024];
     getlogin_r(buffer, 1024);
@@ -146,8 +165,7 @@ bool internal(string str){
     }
     return true;
 }
-int external(string str){
-    vector<string> cmd = parse_single_cmd(str);
+int external(vector<string> cmd){
     char **args;
     args = new char*[cmd.size()+1];
     for(int i = 0 ; i < (int)cmd.size() ; i++){
@@ -156,7 +174,6 @@ int external(string str){
     }
     args[cmd.size()] = 0;
     if(execvp(cmd[0].c_str(), args)){
-        cout << "Command not found: " << cmd[0] << endl;
     }
     for(int i = 0 ; i < (int)cmd.size() ; i++)
         delete [] args[i];
@@ -182,6 +199,11 @@ void do_command(string str){
             if(i != pip_num){
                 pipe(pip[i]);
             }
+            vector<string> cmd = parse_single_cmd(str);
+            if(!can_exec(cmd[0])){
+                cout << "Command not found: " << cmd[0] << endl;
+                continue;
+            }
             int pid = fork();
             if(pid){
                 setpgid(pid, first_pid);
@@ -202,7 +224,7 @@ void do_command(string str){
                     close(pip[i-1][0]);
                     close(pip[i-1][1]);
                 }
-                external(p_cmd[i]);
+                external(cmd);
             }
             /* for beauty */
             cout << (i != (int)p_cmd.size()-1 ? "├─" : "└─");
