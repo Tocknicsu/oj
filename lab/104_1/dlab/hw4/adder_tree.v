@@ -55,6 +55,7 @@ module adder_tree(
 	 assign adder3 = adder2_1 + adder2_2;
 	 
     always @(posedge clk) begin
+        $display("QQ ", in_valid, " : ", in0, " ", in1, " ", in2, " ", in3, " ", in4, " ", in5, " ", in6, " ", in7);
         if (rst) sum <= 0;
         else sum <= sum + adder3;
     end
