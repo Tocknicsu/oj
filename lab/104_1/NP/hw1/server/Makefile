@@ -9,6 +9,9 @@ TMP_DIR = ./tmp
 OBJS := function config log server sh
 
 all:
+	-mkdir bin
+	-mkdir test
+	-mkdir tmp
 	#make clean
 	make server
 	cp ./bin/server ./server
