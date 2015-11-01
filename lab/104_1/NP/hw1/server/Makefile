@@ -1,5 +1,5 @@
 CC = g++
-FLAGS = -std=c++11 -g -O2
+FLAGS = -std=c++11 -g -Wunused-result
 INCLUDE_DIR = ./include
 SRC_DIR = ./src
 BIN_DIR = ./bin

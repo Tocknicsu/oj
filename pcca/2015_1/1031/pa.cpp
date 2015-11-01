@@ -61,7 +61,7 @@ int main(){
     int t;
     scanf("%d", &t);
     for(int i = 0 ; i < t ; i++){
-        printf("Case #%d: %lld\n", i, Solve());
+        printf("Case #%d: %lld\n", i+1, Solve());
     }
     return 0;
 }
