@@ -65,6 +65,12 @@ draw(){
     done
     msg=$msg$line1
     dialog --no-collapse --no-lines --infobox "$msg" 19 29
+	#for i in $(seq 1 4) ;do
+	#	for j in $(seq 1 4); do
+	#		eval printf "%d" \$array$i$j
+	#	done
+	#	printf "\n"
+	#done
 
 }
 srand(){
@@ -104,6 +110,8 @@ swap(){
     eval $2=\$tmp
 }
 rotate(){
+	echo rotate!!! $1
+	if [ $1 -eq 0 ] ;then return; fi
     for k in $(seq 1 $1); do
         for i in $(seq 1 4); do
             for j in $(seq 1 $i); do
@@ -198,9 +206,10 @@ game(){
         esac
         _new=0
         if [ $dir -ne -1 ]; then
-            rotate $dir; move; compress; move; rotate $((4-$dir))
+            rotate $dir; move; compress;
+			move; rotate $((4-$dir))
         fi
-        if [ $_new -eq 1 ]; then random; fi
+        #if [ $_new -eq 1 ]; then random; fi
         win
     done
 }
