@@ -65,13 +65,6 @@ draw(){
     done
     msg=$msg$line1
     dialog --no-collapse --no-lines --infobox "$msg" 19 29
-	#for i in $(seq 1 4) ;do
-	#	for j in $(seq 1 4); do
-	#		eval printf "%d" \$array$i$j
-	#	done
-	#	printf "\n"
-	#done
-
 }
 srand(){
     seed=`awk 'BEGIN{ srand(); print int(rand()*65536); }'`
@@ -209,7 +202,7 @@ game(){
             rotate $dir; move; compress;
 			move; rotate $((4-$dir))
         fi
-        #if [ $_new -eq 1 ]; then random; fi
+        if [ $_new -eq 1 ]; then random; fi
         win
     done
 }
