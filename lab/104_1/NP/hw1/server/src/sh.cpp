@@ -116,11 +116,11 @@ int SH::exec(std::string cmd){
         if(i == cmds.size() - 1){   //last command pipe
             for(int k = 0 ; k < 2 ; k++){
                 if(parse_cmd[i].size() > 1 && parse_cmd[i].back()[0] == '|'){
-                    last_stdout = atoi(parse_cmd[i].back().substr(1, parse_cmd[i].back().size()-1).c_str());
+                    last_stdout = 2 * atoi(parse_cmd[i].back().substr(1, parse_cmd[i].back().size()-1).c_str());
                     parse_cmd[i].pop_back();
                 }
                 if(parse_cmd[i].size() > 1 && parse_cmd[i].back()[0] == '!'){
-                    last_stderr = atoi(parse_cmd[i].back().substr(1, parse_cmd[i].back().size()-1).c_str());
+                    last_stderr = 2 * atoi(parse_cmd[i].back().substr(1, parse_cmd[i].back().size()-1).c_str());
                     parse_cmd[i].pop_back();
                 }
             } if(last_stderr != -1){

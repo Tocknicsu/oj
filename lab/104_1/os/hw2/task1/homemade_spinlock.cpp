@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include <pthread.h>
 using namespace std;
-void homemade_spin_lock(int* spinlock_addr){
+void homemade_spin_lock(volatile int* spinlock_addr){
     asm(
         "spin_lock: \n\t"
         "xorl %%ecx, %%ecx \n\t"
@@ -11,13 +11,13 @@ void homemade_spin_lock(int* spinlock_addr){
         "lock; cmpxchgl %%ecx, (%0) \n\t" "jnz spin_lock_retry \n\t"
         : : "r" (spinlock_addr) : "ecx", "eax" );
 }
-void homemade_spin_unlock(int* spinlock_addr) {
+void homemade_spin_unlock(volatile int* spinlock_addr) {
     asm(
         "spin_unlock: \n\t" "movl $0, (%0) \n\t"
         : : "r" (spinlock_addr) : );
 }
 
-pthread_spinlock_t spinlock;
+int spinlock;
 
 class Counter{
     int value;
@@ -35,7 +35,7 @@ class Counter{
 Counter x;
 
 void* ThreadRunner(void*){
-    for(int k = 0 ; k < 10000 ; k++){
+    for(int k = 0 ; k < 100000000 ; k++){
         homemade_spin_lock(&spinlock);
         x.Increment();
         homemade_spin_unlock(&spinlock);
@@ -44,12 +44,10 @@ void* ThreadRunner(void*){
 
 int main(){
     pthread_t tid[3];
-    pthread_spin_init(&spinlock, 0);
     for(int i = 0 ; i < 3 ; i++)
         pthread_create(&tid[i], NULL, ThreadRunner, 0);
     for(int i = 0 ; i < 3 ; i++)
         pthread_join(tid[i], NULL);
-    pthread_spin_destroy(&spinlock);
     x.Print();
     return 0;
 }

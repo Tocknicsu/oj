@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include <pthread.h>
 #define THREAD_NUM 4
-#define EACH_POINTS 1000000
+#define EACH_POINTS 100000000
 using namespace std;
 
 pthread_spinlock_t spinlock;
@@ -9,14 +9,20 @@ pthread_spinlock_t spinlock;
 int circle, total;
 
 void* ThreadRunner(void*){
+    unsigned int seed = rand();
     for(int i = 0 ; i < EACH_POINTS ; i++){
-        float x = float(rand()) / RAND_MAX;
-        float y = float(rand()) / RAND_MAX;
+        seed = rand_r(&seed);
+        float x = float(seed) / RAND_MAX;
+        seed = rand_r(&seed);
+        float y = float(seed) / RAND_MAX;
         pthread_spin_lock(&spinlock);
         total += 1;
-        if(x * x + y * y <= 1)
-            circle += 1;
         pthread_spin_unlock(&spinlock);
+        if(x * x + y * y <= 1){
+            pthread_spin_lock(&spinlock);
+            circle += 1;
+            pthread_spin_unlock(&spinlock);
+        }
     }
 }
 
