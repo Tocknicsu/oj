@@ -1,6 +1,0 @@
-   1 bin
-   2 ls.txt
-   3 test1.txt
-   4 test2.txt
-   5 test3.txt
-   6 test.html

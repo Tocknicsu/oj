@@ -1,8 +1,10 @@
 #include <bits/stdc++.h>
 #include <termios.h>
-#include <unistd.h>
+#include <unistd.h> 
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <errno.h>
+#include <fcntl.h>
 using namespace std;
 
 map<int, int> process;
@@ -63,7 +65,10 @@ vector<string> parse_multi_cmd(string source){
     }
     if(cmd.size() && cmd.back().size() && cmd.back().back() == ' ') cmd.back().pop_back();
     if(cmd.size() && cmd[0].empty()) cmd.pop_back();
-    if(cmd.size() && cmd.back().size() && cmd.back().back() == '&') cmd.push_back("&");
+    if(cmd.size() && cmd.back().size() && cmd.back().back() == '&'){
+        cmd.back().pop_back();
+        cmd.push_back("&");
+    }
     
     return cmd;
 }
@@ -82,38 +87,25 @@ void signal_handler_SIGINT(int sig){
 }
 void WAIT(int pid){
     int status;
-    int wait_num = process[pid];
-    for(int i = 0 ; i < wait_num ; i++){
+    for(int i = 0 ; i < process[pid] ; i++){
         int m_pid = waitpid(-pid, &status, WUNTRACED);
-        if(WIFEXITED(status)){
-            process[pid]--;
+        if(m_pid == -1) continue;
+        if(WIFEXITED(status) || WIFSIGNALED(status)){
             all_process.erase(m_pid);
         }
     }
-    if(WIFSIGNALED(status) || WIFSTOPPED(status))
-        cout << endl;
-    if(WIFSTOPPED(status) && WSTOPSIG(status)==SIGTSTP)
-        cout << "For recovery: fg " << pid << endl;
     last_status = WEXITSTATUS(status);
-}
-void signal_handler_SIGCHLD(int sig){
-    int status;
-    int pid;
-    pid = waitpid(-1, &status, WNOHANG);
-        all_process.erase(pid);
-        process[getpgid(pid)]--;
 }
 void signal_handler_SIGTSTP(int sig){
     cout << endl;
     prompt();
 }
-void my_exit(){
-    int status;
-    for(set<int>::iterator it = all_process.begin() ; it != all_process.end() ; ++it){
-        cout << "kill pid: " << *it << endl;
-        kill(*it, SIGINT);
-        waitpid(*it, &status, 0);
+void signal_handler_SIGCHLD(int sig){
+    int pid, status;
+    while(pid = waitpid(-1, &status, WNOHANG), pid > 0){
     }
+}
+void my_exit(){
     cout << "Goodbye!" << endl;
     exit(0);
 }
@@ -153,7 +145,7 @@ int external(string str){
     }
     args[cmd.size()] = 0;
     if(execvp(cmd[0].c_str(), args)){
-        cout << "Command not found: " << cmd[0] << endl;
+        cerr << "Command not found: " << cmd[0] << endl;
     }
     for(int i = 0 ; i < (int)cmd.size() ; i++)
         delete [] args[i];
@@ -181,14 +173,19 @@ void do_command(string str){
             }
             int pid = fork();
             if(pid){
-                setpgid(pid, first_pid);
+                int x = setpgid(pid, first_pid);
+                if(x == -1)
+                    perror("");
                 all_process.insert(pid);
                 if(!first_pid){
                     first_pid = pid;
+                    tcsetpgrp(STDIN_FILENO, first_pid);
                 } else {
                     close(pip[i-1][0]), close(pip[i-1][1]);
                 }
             } else {
+                if(i == 0)
+                    raise(SIGSTOP);
                 if(i != pip_num){
                     dup2(pip[i][1], 1);
                     close(pip[i][0]);
@@ -210,10 +207,11 @@ void do_command(string str){
             cout << set_color("", "", "", 1) << endl;
             /* for beauty */
         }
-        tcsetpgrp(STDIN_FILENO, first_pid);
+        kill(first_pid, SIGCONT);
         process[first_pid] = p_cmd.size();
-        if(!background)
+        if(!background){
             WAIT(first_pid);
+        }
         tcsetpgrp(STDIN_FILENO, getpid());
     }
 }

@@ -5,7 +5,8 @@
 
 void signal_handler_SIGCHLD(int sig){
     int status;
-    int pid = waitpid(-getpid(), &status, WNOHANG);
+    int pid;
+    while(pid = waitpid(-getpid(), &status, WNOHANG), pid!=-1);
 }
 
 int main(){

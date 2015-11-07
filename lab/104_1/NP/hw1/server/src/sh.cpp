@@ -106,8 +106,6 @@ int SH::exec(std::string cmd){
     int first_pid = 0;
     int pip_num = cmds.size() - 1;
     int pip[pip_num][2];
-    /* to do better */
-
 
     int last_stderr = -1;
     int last_stdout = -1;
