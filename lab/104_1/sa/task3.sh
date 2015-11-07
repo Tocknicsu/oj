@@ -110,7 +110,6 @@ swap(){
     eval $2=\$tmp
 }
 rotate(){
-	echo rotate!!! $1
 	if [ $1 -eq 0 ] ;then return; fi
     for k in $(seq 1 $1); do
         for i in $(seq 1 4); do
