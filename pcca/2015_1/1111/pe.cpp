@@ -70,10 +70,22 @@ struct S{
             s[1][0] -= 10;
             s[0][0]++;
         }
+        while(s[1].size() && s[1][s[1].size()-1] == s[2][s[2].size()-1]){
+            s[1].pop_back();
+            s[2].push_back(s[2][0]);
+            s[2] = s[2].substr(1, s[2].size()-1);
+        }
+        char another[200], one[200];
+        strcpy(one, s[2].c_str());
+        strcpy(another, one);
+        strcat(another, one);
+        char *p = strstr(another+1, one);
+        int q = p - another;
+        s[2] = s[2].substr(0, q);
     }
 };
 int main(){
-   // freopen("pa.in", "r", stdin);
+    freopen("pa.in", "r", stdin);
     ios_base::sync_with_stdio(0), cin.tie(0);
     while(cin >> m >> n){
         S M(m), N(n);
