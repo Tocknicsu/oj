@@ -15,13 +15,17 @@ struct S{
     void print(){
         for(int i = 0 ; i < (int)s[0].size() ; i++)
             cout << char(s[0][i]+'0');
-        cout << '.';
-        for(int i = 0 ; i < (int)s[1].size() ; i++)
-            cout << char(s[1][i]+'0');
-        cout << '(';
-        for(int i = 0 ; i < (int)s[2].size() ; i++)
-            cout << char(s[2][i]+'0');
-        cout << ')' << endl;
+        if(s[1].size() || s[2].size()){
+            cout << '.';
+            for(int i = 0 ; i < (int)s[1].size() ; i++)
+                cout << char(s[1][i]+'0');
+            if(s[2].size()){
+                cout << '(';
+                for(int i = 0 ; i < (int)s[2].size() ; i++)
+                    cout << char(s[2][i]+'0');
+                cout << ')';
+            }
+        }
     }
     void merge(S& _s){
         while( (int)s[1].size() < (int)_s.s[1].size() ){
@@ -58,7 +62,17 @@ struct S{
         }
         if(s[2][0] >= 10){
             s[2][0] -= 10;
-            s[1][(int)s[0].size()-1]++;
+            if(s[1].size())
+                s[1][(int)s[1].size()-1]++;
+            else
+                s[0][0]++;
+            s[2][(int)s[2].size()-1]++;
+            for(int i = (int)s[2].size() ; i > 0 ; i--){
+                if(s[2][i] >= 10){
+                    s[2][i] -= 10;
+                    s[2][i-1]++;
+                }
+            }
         }
         for(int i = (int)s[1].size() ; i > 0 ; i--){
             if(s[1][i] >= 10){
@@ -75,19 +89,29 @@ struct S{
             s[2].push_back(s[2][0]);
             s[2] = s[2].substr(1, s[2].size()-1);
         }
-        char another[200], one[200];
+        char another[64*64], one[64*64];
         strcpy(one, s[2].c_str());
         strcpy(another, one);
         strcat(another, one);
         char *p = strstr(another+1, one);
         int q = p - another;
         s[2] = s[2].substr(0, q);
+        if(s[2].size() == 1 && s[2][0] == 9 && s[1].size() == 0){
+            if(s[1].size())
+                s[1][(int)s[1].size()-1]++;
+            else
+                s[0][0]++;
+            s[2] = "";
+        }
     }
 };
 int main(){
     freopen("pa.in", "r", stdin);
     ios_base::sync_with_stdio(0), cin.tie(0);
+    bool flag = true;
     while(cin >> m >> n){
+        if(flag) flag = false;
+        else cout << endl;
         S M(m), N(n);
         M.merge(N);
         M.print();
