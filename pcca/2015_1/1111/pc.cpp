@@ -27,6 +27,7 @@ int main(){
     while(n--){
         int k, s, t, a, b;
         scanf("%d%d%d%d%d", &k, &s, &t, &a, &b);
+        cout << s << t << a << b << endl;
         int S[3];
         S[0] = s; S[1] = a; S[2] = b;
         int dp[3][5000];
@@ -52,17 +53,29 @@ int main(){
                     }
                 }
             }
+            for(int i = 0 ; i < point[k] ; i++){
+                printf("%d: %d %d\n", i, dp[u][i], prev[u][i]);
+            }
         }
+        cout << s << t << a << b << endl;
         stack<int> ans;
         if(dp[0][a] + dp[1][b] + dp[2][t] < dp[0][b] + dp[2][a] + dp[1][t]){
             int now;
-
+            /*
+            now = t;
+            while(prev[2][now] != b){
+                ans.push(prev[2][now]);
+                now = prev[2][now];
+            }
+            */
+            /*
             now = b;
             while(prev[1][now] != a){
                 ans.push(prev[1][now]);
                 now = prev[1][now];
                 printf("%d\n", now);
             }
+            */
 
             now = a;
             ans.push(a);
@@ -72,7 +85,12 @@ int main(){
             }
             ans.push(s);
         } else {
-            printf("G");
+            int now = t;
+            cout << now << endl;
+            while(prev[1][now] != a){
+                ans.push(prev[1][now]);
+                now = prev[1][now];
+            }
         }
         while(ans.size()){
             printf("%d ", ans.top());
@@ -82,14 +100,5 @@ int main(){
 
 
     }
-
-    /*
-    for(int i = 0 ; i < point[3] ; i++){
-        cout << i << ": ";
-        for(int j = 0 ; j < (int)ed[3][i].size() ; j++)
-            cout << ed[3][i][j] << ' ';
-        cout << endl;
-    }
-    */
     return 0;
 }
