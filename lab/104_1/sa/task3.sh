@@ -96,7 +96,7 @@ random(){
     rand
     v=$(((${seed}%2+1)*2))
     eval eval array\$_empty_x${pos}\$_empty_y${pos}=$v
-	echo $pos $v >> record
+#	echo $pos $v >> record
 	eval echo \$_empty_x${pos} \$_empty_y${pos}
 }
 swap(){
