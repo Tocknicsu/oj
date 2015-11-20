@@ -1,0 +1,20 @@
+xst -intstyle ise -ifn "D:/0316239/lab5/lab5.xst" -ofn "D:/0316239/lab5/lab5.syr" 
+xst -intstyle ise -ifn "D:/0316239/lab5/lab5.xst" -ofn "D:/0316239/lab5/lab5.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lab5.ucf -p xc3s500e-fg320-4 lab5.ngc lab5.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o lab5_map.ncd lab5.ngd lab5.pcf 
+par -w -intstyle ise -ol high -t 1 lab5_map.ncd lab5.ncd lab5.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml lab5.twx lab5.ncd -o lab5.twr lab5.pcf -ucf lab5.ucf 
+bitgen -intstyle ise -f lab5.ut lab5.ncd 
+xst -intstyle ise -ifn "D:/0316239/lab5/lab5.xst" -ofn "D:/0316239/lab5/lab5.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lab5.ucf -p xc3s500e-fg320-4 lab5.ngc lab5.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o lab5_map.ncd lab5.ngd lab5.pcf 
+par -w -intstyle ise -ol high -t 1 lab5_map.ncd lab5.ncd lab5.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml lab5.twx lab5.ncd -o lab5.twr lab5.pcf -ucf lab5.ucf 
+bitgen -intstyle ise -f lab5.ut lab5.ncd 
+xst -intstyle ise -ifn "D:/0316239/lab5/lab5.xst" -ofn "D:/0316239/lab5/lab5.syr" 
+xst -intstyle ise -ifn "D:/0316239/lab5/lab5.xst" -ofn "D:/0316239/lab5/lab5.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lab5.ucf -p xc3s500e-fg320-4 lab5.ngc lab5.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o lab5_map.ncd lab5.ngd lab5.pcf 
+par -w -intstyle ise -ol high -t 1 lab5_map.ncd lab5.ncd lab5.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml lab5.twx lab5.ncd -o lab5.twr lab5.pcf -ucf lab5.ucf 
+bitgen -intstyle ise -f lab5.ut lab5.ncd 

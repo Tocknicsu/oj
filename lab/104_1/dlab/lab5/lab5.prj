@@ -1,0 +1,3 @@
+verilog work "uart.v"
+verilog work "debounce.v"
+verilog work "lab5.v"

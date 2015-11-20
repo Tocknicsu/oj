@@ -35,7 +35,7 @@ class Counter{
 Counter x;
 
 void* ThreadRunner(void*){
-    for(int k = 0 ; k < 100000000 ; k++){
+    for(int k = 0 ; k < 100000 ; k++){
         homemade_spin_lock(&spinlock);
         x.Increment();
         homemade_spin_unlock(&spinlock);
