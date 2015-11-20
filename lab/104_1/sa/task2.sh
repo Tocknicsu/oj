@@ -4,8 +4,7 @@ help(){
 	echo "./weather -l locations [-u unit] [-a | -c | -d day | -s]"
 	exit
 }
-if [ -e ~/.weather.conf ]; then
-else
+if ! [ -e ~/.weather.conf ]; then
 	echo location=hsinchu > ~/.weather.conf
 	echo unit=c >> ~/.weather.conf
 fi
