@@ -2,6 +2,7 @@
 unit=c
 help(){
 	echo "./weather -l locations [-u unit] [-a | -c | -d day | -s]"
+	exit
 }
 if [ -e ~/.weather.conf ]; then
 else
@@ -25,8 +26,7 @@ if [ -z $location ]; then
 	echo "Must specify location"
 	help; exit
 fi
-if [ -n "$current_condition" -o -n "$days" -o -n "$sunset" ] ; then
-else
+if [ -z "$current_condition" -a -z "$days" -a -z "$sunset" ] ; then
 	echo "Must specify type of information"
 	help; exit
 fi
