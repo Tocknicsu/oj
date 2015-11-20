@@ -3,6 +3,12 @@ unit=c
 help(){
 	echo "./weather -l locations [-u unit] [-a | -c | -d day | -s]"
 }
+if [ -e ~/.weather.conf ]; then
+else
+	echo location=hsinchu > ~/.weather.conf
+	echo unit=c >> ~/.weather.conf
+fi
+
 . ~/.weather.conf
 while getopts "hl:u:acd:s" OPTION; do
 	case $OPTION in
