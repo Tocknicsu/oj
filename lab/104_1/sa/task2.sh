@@ -3,7 +3,6 @@ unit=c
 help(){
 	echo "./weather -l locations [-u unit] [-a | -c | -d day | -s]"
 }
-#while read line; do
 . ~/.weather.conf
 while getopts "hl:u:acd:s" OPTION; do
 	case $OPTION in
@@ -56,4 +55,3 @@ for locat in $location; do
 		printf "sunrise: %s, sunset: %s\n" $sunrise $sunset
 	fi
 done
-# <yweather:condition  text="Partly Cloudy"  code="29"  temp="75"  date="Tue  17 Nov 2015 1:00 am CST" />
