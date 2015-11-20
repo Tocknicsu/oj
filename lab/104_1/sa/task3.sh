@@ -67,10 +67,10 @@ draw(){
     dialog --no-collapse --no-lines --infobox "$msg" 19 29
 }
 srand(){
-    seed=`awk 'BEGIN{ srand(); print int(rand()*65536); }'`
+    seed=`awk 'BEGIN{ srand(); print int(rand()*131072); }'`
 }
 rand(){
-    seed=`awk "BEGIN{ srand($seed); print int(rand()*65536)}"`
+	seed=`awk "BEGIN{ srand($seed+int(rand()*131072)); print int(rand()*131072)}"`
 }
 empty(){
     _empty=0
@@ -96,6 +96,8 @@ random(){
     rand
     v=$(((${seed}%2+1)*2))
     eval eval array\$_empty_x${pos}\$_empty_y${pos}=$v
+#	echo $pos $v >> record
+	eval echo \$_empty_x${pos} \$_empty_y${pos}
 }
 swap(){
     eval tmp=\$$1
@@ -159,7 +161,7 @@ init(){
 save(){
     #dialog --clear --fselect "" 15 80 2>".2048.save.config"
     #read filename < ".2048.save.config"
-    filename=`awk 'BEGIN{print ".2048.save." strftime("%Y-%m-%d_%H:%M:%S")}'`
+    filename=`awk 'BEGIN{printf ".2048.save."; system("date \"+%Y-%m-%d_%H:%M:%S\"")}'`
     echo $_game_status > $filename
     for i in $(seq 1 4); do
         for j in $(seq 1 4); do
