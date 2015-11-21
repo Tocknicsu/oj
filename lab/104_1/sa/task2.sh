@@ -1,15 +1,16 @@
 #!/bin/sh
-unit=c
+unit=f
 help(){
 	echo "./weather -l locations [-u unit] [-a | -c | -d day | -s]"
 	exit
 }
 if ! [ -e ~/.weather.conf ]; then
-	echo location=hsinchu > ~/.weather.conf
-	echo unit=c >> ~/.weather.conf
+	#echo location=hsinchu > ~/.weather.conf
+	#echo unit=c >> ~/.weather.conf
+else
+	. ~/.weather.conf
 fi
 
-. ~/.weather.conf
 while getopts "hl:u:acd:s" OPTION; do
 	case $OPTION in
 		h) help;;
