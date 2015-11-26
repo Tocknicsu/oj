@@ -1,13 +1,12 @@
 #all: mutex.cpp sem.cpp spinlock.cpp homemade_spinlock.cpp pi_lock.c pi_free.c crossroad.c
-all: mutex.cpp
+all: mutex.cpp sem.cpp spinlock.cpp homemade_spinlock.cpp crossroad.cpp
 	g++ mutex.cpp -lpthread -o mutex
-	time ./mutex
-#	g++ sem.cpp -lpthread -o sem
-#	g++ spinlock.cpp -lpthread -o spinlock
-#	g++ homemade_spinlock.cpp -lpthread -o homemade_spinlock
+	g++ sem.cpp -lpthread -o sem
+	g++ spinlock.cpp -lpthread -o spinlock
+	g++ homemade_spinlock.cpp -lpthread -o homemade_spinlock
 #	gcc pi_lock.c -lpthread -o pi_lock
 #	gcc pi_free.c -lpthread -o pi_free
-#	gcc crossroad.c -lpthread -o crossroad
+	g++ crossroad.cpp -lpthread -o crossroad
 clean:
 	rm -f mutex
 #	rm -f sem
