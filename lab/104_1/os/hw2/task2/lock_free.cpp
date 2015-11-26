@@ -4,37 +4,28 @@ int THREAD_NUM;
 int TOTAL_POINTS;
 using namespace std;
 
-pthread_spinlock_t spinlock;
-
-class Counter{
-    int circle, total;
-    public:
-    unsigned seed;
-        Counter() : circle(0), total(0) {}
-        void go(){
-            double x = double(rand_r(&seed)) / RAND_MAX;
-            double y = double(rand_r(&seed)) / RAND_MAX;
-            total += 1;
-            if(x * x + y * y <= 1)
-                circle += 1;
-        }
-        void print(){
-            cout << circle << '/' << total << endl;
-        }
-        int get_total() { return total; }
-        int get_circle() { return circle; }
-};
-
-
-Counter x[128];
+int circle[128];
+int total[128];
 
 void* ThreadRunner(void* arg){
     int num = *(int*) arg;
-    x[num].seed = rand();
-    int _num = TOTAL_POINTS / THREAD_NUM;
+	unsigned int seed = rand();
+	int _num;
+	if(num == THREAD_NUM - 1){
+		_num = TOTAL_POINTS - (THREAD_NUM - 1) * (TOTAL_POINTS / THREAD_NUM);
+	} else {
+		_num = TOTAL_POINTS / THREAD_NUM;
+	}
+	int local_total = 0, local_circle = 0;
     for(int k = 0 ; k < _num ; k++){
-        x[num].go();
+		double x = double(rand_r(&seed)) / RAND_MAX;
+		double y = double(rand_r(&seed)) / RAND_MAX;
+		local_total += 1;
+		if(x * x + y * y <= 1)
+			local_circle += 1;
     }
+	circle[num] = local_circle;
+	total[num] = local_total;
 }
 
 int main(int argc, char* argv[]){
@@ -49,10 +40,10 @@ int main(int argc, char* argv[]){
     }
     for(int i = 0 ; i < THREAD_NUM ; i++)
         pthread_join(tid[i], NULL);
-    int total = 0, circle = 0;
+    int sum_total = 0, sum_circle = 0;
     for(int i = 0 ; i < THREAD_NUM ; i++)
-        total += x[i].get_total(), circle += x[i].get_circle();
-    cout << circle << ' ' << total << endl;
-    cout << 4 * float(circle) / float(total) << endl;
+		sum_total += total[i], sum_circle += circle[i];
+    cout << sum_circle << ' ' << sum_total << endl;
+    cout << 4 * float(sum_circle) / float(sum_total) << endl;
     return 0;
 }
