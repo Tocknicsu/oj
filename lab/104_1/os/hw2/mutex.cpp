@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdlib>
 #include <pthread.h>
 using namespace std;
 pthread_mutex_t m_mutex;
@@ -24,6 +25,7 @@ void* ThreadRunner(void*){
 }
 
 int main(int argc, char* argv[]){
+    pthread_mutex_init(&m_mutex, NULL);
     int thread_num = 3;
     if(argc > 1)
         thread_num = atoi(argv[1]);
@@ -32,6 +34,7 @@ int main(int argc, char* argv[]){
         pthread_create(&tid[i], NULL, ThreadRunner, 0);
     for(int i = 0 ; i < thread_num ; i++)
         pthread_join(tid[i], NULL);
+    pthread_mutex_destroy(&m_mutex);
     x.Print();
     return 0;
 }

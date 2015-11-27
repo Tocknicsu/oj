@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdlib>
 #include <pthread.h>
 using namespace std;
 
@@ -12,7 +13,7 @@ class Counter{
             value++;
         }
         void Print(){
-            cout << value;
+            cout << value << endl;
         }
 };
 
@@ -27,12 +28,15 @@ void* ThreadRunner(void*){
     }
 }
 
-int main(){
-    pthread_t tid[3];
+int main(int argc, char* argv[]){
+    int thread_num = 3;
+    if(argc > 1)
+        thread_num = atoi(argv[1]);
+    pthread_t tid[thread_num];
     pthread_spin_init(&spinlock, 0);
-    for(int i = 0 ; i < 3 ; i++)
+    for(int i = 0 ; i < thread_num ; i++)
         pthread_create(&tid[i], NULL, ThreadRunner, 0);
-    for(int i = 0 ; i < 3 ; i++)
+    for(int i = 0 ; i < thread_num ; i++)
         pthread_join(tid[i], NULL);
     pthread_spin_destroy(&spinlock);
     x.Print();

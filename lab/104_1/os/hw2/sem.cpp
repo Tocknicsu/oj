@@ -1,10 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdlib>
 #include <pthread.h>
 #include <semaphore.h>
 using namespace std;
-
 sem_t m_mutex;
-
 class Counter{
     int value;
     public:
@@ -13,13 +12,10 @@ class Counter{
             value++;
         }
         void Print(){
-            cout << value;
+            cout << value << endl;
         }
 };
-
-
 Counter x;
-
 void* ThreadRunner(void*){
     for(int k = 0 ; k < 100000000 ; k++){
         sem_wait(&m_mutex);
@@ -27,13 +23,15 @@ void* ThreadRunner(void*){
         sem_post(&m_mutex);
     }
 }
-
-int main(){
+int main(int argc, char* argv[]){
+    int thread_num = 3;
+    if(argc > 1)
+        thread_num = atoi(argv[1]);
     sem_init(&m_mutex, 0, 1);
-    pthread_t tid[3];
-    for(int i = 0 ; i < 3 ; i++)
+    pthread_t tid[thread_num];
+    for(int i = 0 ; i < thread_num ; i++)
         pthread_create(&tid[i], NULL, ThreadRunner, 0);
-    for(int i = 0 ; i < 3 ; i++)
+    for(int i = 0 ; i < thread_num ; i++)
         pthread_join(tid[i], NULL);
     sem_destroy(&m_mutex);
     x.Print();

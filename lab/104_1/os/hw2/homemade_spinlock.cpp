@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdlib>
 #include <pthread.h>
 using namespace std;
 void homemade_spin_lock(volatile int* spinlock_addr){
@@ -16,9 +17,7 @@ void homemade_spin_unlock(volatile int* spinlock_addr) {
         "spin_unlock: \n\t" "movl $0, (%0) \n\t"
         : : "r" (spinlock_addr) : );
 }
-
 int spinlock;
-
 class Counter{
     int value;
     public:
@@ -27,13 +26,10 @@ class Counter{
             value++;
         }
         void Print(){
-            cout << value;
+            cout << value << endl;
         }
 };
-
-
 Counter x;
-
 void* ThreadRunner(void*){
     for(int k = 0 ; k < 100000000 ; k++){
         homemade_spin_lock(&spinlock);
@@ -41,12 +37,14 @@ void* ThreadRunner(void*){
         homemade_spin_unlock(&spinlock);
     }
 }
-
-int main(){
-    pthread_t tid[3];
-    for(int i = 0 ; i < 3 ; i++)
+int main(int argc, char* argv[]){
+    int thread_num = 3;
+    if(argc > 1)
+        thread_num = atoi(argv[1]);
+    pthread_t tid[thread_num];
+    for(int i = 0 ; i < thread_num ; i++)
         pthread_create(&tid[i], NULL, ThreadRunner, 0);
-    for(int i = 0 ; i < 3 ; i++)
+    for(int i = 0 ; i < thread_num ; i++)
         pthread_join(tid[i], NULL);
     x.Print();
     return 0;
