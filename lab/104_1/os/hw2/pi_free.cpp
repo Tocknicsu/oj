@@ -32,14 +32,17 @@ void* ThreadRunner(void* arg){
 }
 
 int main(int argc, char* argv[]){
-    THREAD_NUM = 1;
+    THREAD_NUM = 16;
     TOTAL_POINTS = 100000000;
     if(argc > 1){
-        THREAD_NUM = atoi(argv[1]);
+    //    THREAD_NUM = atoi(argv[1]);
+        TOTAL_POINTS = atoi(argv[1]);
     }
+    /*
     if(argc > 2){
-        TOTAL_POINTS = atoi(argv[2]);
+        TOTAL_POINTS = atoi(argv[1]);
     }
+    */
     srand(time(NULL));
     pthread_t tid[THREAD_NUM];
     int arg[THREAD_NUM];
