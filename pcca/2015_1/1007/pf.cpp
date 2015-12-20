@@ -1,3 +1,8 @@
+/*
+題目：砍龍需要兩把劍 問最少要準備幾把
+
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 #define MAX 1048576
