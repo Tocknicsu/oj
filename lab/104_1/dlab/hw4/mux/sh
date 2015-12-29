@@ -1,3 +1,0 @@
-python3 mux.py > mux.v
-python3 template.py > template.v 
-iverilog mux.v template.v controller.v adder_tree.v 
