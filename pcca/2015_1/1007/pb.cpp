@@ -77,7 +77,6 @@ int Solve(){
 }
 
 int main(){
-//freopen("pb.in", "r", stdin);
     int n;
     scanf("%d", &n);
     for(int i = 1 ; i <= n ; i++){

@@ -1,8 +1,3 @@
-/*
-給定n個人走一條線
-每個人有瞬間出現時間 起點 終點
-問每個人會和幾個人碰面
-*/
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -23,7 +18,6 @@ struct S{
 
 
 int main(){
-    //freopen("pd.in", "r", stdin);
     int n;
     while(~scanf("%d", &n)){
         vector<S> v;
@@ -43,11 +37,6 @@ int main(){
                 int end = min(x.te, y.te);
                 PII a = x.find(start, end);
                 PII b = y.find(start, end);
-                /*
-                printf("%d %d:\n", i, j);
-                printf("\t%d %d\n", x.d, y.d);
-                printf("\t%d %d %d %d\n", a.f, a.s, b.f, b.s);
-                */
                 if(x.d == y.d){
                     if(a.f == b.f) ans++;
                 } else if(x.d == -1){

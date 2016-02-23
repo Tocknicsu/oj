@@ -6,7 +6,6 @@ public:
 	Person();
 	Person(int i, int e);
 	~Person();
-
 private:
 	Person *parent, *child, *sibling; // the pointers to his parent, child, sibling
 	int id; // record Person's id
@@ -15,7 +14,6 @@ private:
 	friend class Promenade;//you could access all valuables in class Promenade
 };
 
-//ctor
 Person::Person(){
 	parent = child = sibling = NULL;
 	id = 0;
@@ -23,7 +21,6 @@ Person::Person(){
 	degree = 0;
 }
 
-//ctor
 Person::Person(int i, int e){// define a new Person with id = i and energy = e
 	parent = child = sibling = NULL;
 	id = i;
@@ -31,13 +28,11 @@ Person::Person(int i, int e){// define a new Person with id = i and energy = e
 	degree = 0;
 }
 
-//dtor
 Person::~Person(){
 
 }
 
 class Promenade{
-
 public:
 	Promenade();
 	~Promenade();
@@ -47,23 +42,18 @@ public:
 	int  calculate_people_below(int energy);
 	int  get_weakest_person();
 	int  size();
-    void go(Person*);
-    void Go();
     int  calc_people_below(Person*,int);
 private:
 	Person *head;
 	int num;//caculate how many people in the promenade
 };
 
-Person* pointer_id[131072];
-
-//ctor
+Person* pointer_id[1310720];
 Promenade::Promenade(){
 	head = new Person();
 	num = 0;
 }
 
-//dtor
 Promenade::~Promenade(){
 }
 
@@ -92,10 +82,8 @@ void Promenade::one_group_joined(Promenade *g){
             now = now->sibling;
         }
     }
-    if(now_a != NULL)
-        now->sibling = now_a;
-    if(now_b != NULL)
-        now->sibling = now_b;
+    if(now_a != NULL) now->sibling = now_a;
+    if(now_b != NULL) now->sibling = now_b;
     delete head;
     head = new_head;
     g->head = NULL;
@@ -120,11 +108,10 @@ void Promenade::one_group_joined(Promenade *g){
             now = now->sibling;
         }
     }
-    Go();
-    printf("====\n");
 }
 
 void Promenade::absorb_energy(int id, int energy){
+    if(pointer_id[id] == NULL) return;
     pointer_id[id]->energy -= energy;
     while(pointer_id[id]->parent != NULL && pointer_id[id]->energy < pointer_id[id]->parent->energy){
         swap(pointer_id[id]->energy, pointer_id[id]->parent->energy);
@@ -146,55 +133,32 @@ void Promenade::absorb_energy(int id, int energy){
             now = now->sibling;
             tmp->head->sibling->sibling = NULL;
             tmp->num = (1 << tmp->head->sibling->degree);
+            tmp->head->sibling->parent = NULL;
             one_group_joined(tmp);
         }
         delete pointer_id[id];
         pointer_id[id] = NULL;
     }
-    Go();
 }
 
 int Promenade::calculate_people_below(int energy){
-	//TODO: You should calculate how many people's energy are below the number (include the number) and return it
-    //O(n)
 	return calc_people_below(head->sibling, energy);
 }
 int Promenade::calc_people_below(Person* now, int energy){
-    if(now == NULL)
-        return 0;
-    return (now->energy <= energy) + calc_people_below(now->sibling, energy) + calc_people_below(now->child, energy);
+    return now == NULL ? 0 : calc_people_below(now->sibling, energy) + ((now->energy <= energy) ? 1 + calc_people_below(now->child, energy):0);
 }
 
 int Promenade::get_weakest_person(){
+    if(head->sibling == NULL) return -1;
     int ans = 2147483647, ans_id;
-    Person *now = head->sibling;
-    while(now){
+    for(Person *now = head->sibling ; now ; now = now->sibling)
         if(ans > now->energy){
             ans = now->energy;
             ans_id = now->id;
         }
-        now = now->sibling;
-    }
-    Go();
 	return ans_id;
 }
 
 int Promenade::size(){
 	return num;
-}
-void Promenade::Go(){
-    go(head->sibling);
-
-}
-void Promenade::go(Person *now){
-    if(now == NULL) return;
-    printf("Now: %d %d\n", now->id, now->energy);
-    if(now->child != NULL){
-        printf("Child: %d\n", now->child->id);
-    }
-    if(now->sibling != NULL){
-        printf("Sibling: %d\n", now->sibling->id);
-    }
-    go(now->child);
-    go(now->sibling);
 }

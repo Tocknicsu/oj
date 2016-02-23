@@ -78,7 +78,6 @@ bool check(char str[]){
 int main(){
     root = new Node();
     other = new Node();
-//    freopen("pa.in", "r", stdin);
     int n;
     scanf("%d", &n);
     cnt = n;

@@ -1,8 +1,3 @@
-/*
-題目：砍龍需要兩把劍 問最少要準備幾把
-
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
 #define MAX 1048576
@@ -53,7 +48,6 @@ int Solve(){
 }
 
 int main(){
-//    freopen("pf.in", "r", stdin);
     int n;
     scanf("%d", &n);
     for(int i = 1 ; i <= n ; i++){

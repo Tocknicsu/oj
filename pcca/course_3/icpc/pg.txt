@@ -1,0 +1,10 @@
+給定一二元樹和一起點
+每次挑選cost最小的一個點加到集合裡
+若cost一樣則挑選id較小的
+問挑選點的順序
+
+策略:
+開一個priority\_queue來挑選下一個要加入的點
+開一張table來記錄這個點是否進過priority\_queue了
+每加入一個點 檢視其parent, left child, right child是否在範圍內
+如果在範圍內且不在priority\_queue裡則加入priority\_queue,並更新table

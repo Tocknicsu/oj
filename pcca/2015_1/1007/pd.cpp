@@ -39,7 +39,6 @@ int Solve(){
     return ans % MOD;
 }
 int main(){
-//    freopen("pd.in", "r", stdin);
     f[0]=1;
     for(int i = 1 ; i < MAX ; i++)
         f[i] = (f[i-1] * i) % MOD;

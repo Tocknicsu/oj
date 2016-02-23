@@ -1,31 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define f first
+#define s second
 typedef long long ll;
-ll c[4096][2];
+typedef pair<ll, ll> PLL;
+bool cmp(const PLL &a, const PLL &b){
+    return a.s > b.s;
+}
 
 int main(){
     int n;
     scanf("%d", &n);
+    vector<PLL> v(n);
     for(int i = 0 ; i < n ; i++){
-        scanf("%lld%lld", &c[i][0], &c[i][1]);
-        if(c[i][0] < c[i][1]) swap(c[i][0], c[i][1]);
+        scanf("%I64d%I64d", &v[i].f, &v[i].s);
+        if(v[i].s > v[i].f) swap(v[i].f, v[i].s);
     }
-    ll ans = 0, k[2] = {};
+    sort(v.begin(), v.end(), cmp);
+    PLL ans;
+    ll value = 0;
     for(int i = 0 ; i < n ; i++){
-        ll now = 0;
+        int cnt = 0;
         for(int j = 0 ; j < n ; j++){
-            if(c[j][0] >= c[i][0] && c[j][1] >= c[i][1])
-                now += c[i][0] * c[i][1];
-            else if(c[j][1] >= c[i][0] && c[j][0] >= c[i][1])
-                now += c[i][0] * c[i][1];
-        }
-        if(now > ans){
-            k[0] = c[i][0];
-            k[1] = c[i][1];
-            ans = now;
+            if(v[j].f >= v[i].f) 
+                cnt++;
+            if(v[j].s * v[i].f * cnt > value){
+                ans = PLL(v[i].f, v[j].s);
+                value = v[j].s * v[i].f * cnt;
+            }
         }
     }
-    printf("%lld\n%lld %lld\n", ans, k[0], k[1]);
-    
+    printf("%I64d\n%I64d %I64d\n", value, ans.f, ans.s);
     return 0;
 }
