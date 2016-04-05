@@ -22,7 +22,7 @@ int main(){
     fclose(fpIn);
 
     msgpack::unpack(result, buf, st.st_size, off);
-    result.get().convert(num_tests);
+//    result.get().convert(num_tests);
 
     for(int k = 0 ; k < num_tests ; k++){
         msgpack::unpack(result, buf, st.st_size, off);
