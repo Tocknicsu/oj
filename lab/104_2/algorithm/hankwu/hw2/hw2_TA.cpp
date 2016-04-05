@@ -34,5 +34,7 @@ int main(){
     fwrite(sbuf.data(), sbuf.size(), 1, fpOut);
     fclose(fpOut);
 
+    delete [] buf;
+
     return 0;
 }

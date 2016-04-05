@@ -28,6 +28,8 @@ int main(){
     msgpack::sbuffer sbuf;
     Read(unpacker, "input.txt");
     unpacker.next(&result);
+    int tests;
+    result.get().convert(tests);
     vector<int> vec;
     while(unpacker.next(&result)){
         result.get().convert(vec);
